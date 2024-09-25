@@ -1,0 +1,1755 @@
+
+body {
+    overflow-x: hidden;
+    font-family: "Rubik", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+}
+
+#promo-bar {
+    background: linear-gradient(90deg, rgba(7,100,196,1) 0%, rgba(45,45,158,1) 0%, rgba(0,206,255,1) 100%);
+    color: #ffffff;
+    padding: 5px;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 200000;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    position: sticky;
+}
+
+.promo-text {
+    padding: 5px 0;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.view-btn {
+    margin-right: 670px;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    padding: 5px 15px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.view-btn:hover {
+    background-color: #39b628;
+    color: white;
+}
+
+.close-btn {
+    color: white;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+    margin-right: 15px;
+}
+/* CSS برای پیکسل‌ها */
+.div2 {
+    z-index: 2000;
+    position: absolute;
+    background-color: #ffcc00;
+    border-radius: 50%; /* برای شکل دایره‌ای */
+    pointer-events: none; /* جلوگیری از تعامل با پیکسل‌ها */
+}
+
+
+.navbar-container {
+    margin-top: 23px;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    left: 50%;
+    vertical-align: middle;
+    text-align: center;
+    align-items: center;
+    transform: translateX(-50%);
+    z-index: 6000;
+
+}
+
+.navbar-items ,.navbar-items a{
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    transition: ease 0.3s;
+    -webkit-transition: ease 0.3s;
+    -moz-transition: ease 0.3s;
+    -ms-transition: ease 0.3s;
+    -o-transition: ease 0.3s;
+}
+.navbar-items a:hover {
+    color: #4874d1;
+}
+.logo img {
+    margin-left: -15px;
+    align-items: center;
+    width: 40px;
+    vertical-align: middle;
+}
+.logo {
+    margin-left: 50px;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    vertical-align: middle;
+}
+.logo a{
+    font-size: 22px;
+    font-weight: 700;
+}
+.login {
+    border-radius: 20px;
+    padding: 7px 15px;
+    color: white;
+    background: linear-gradient(120deg, #4874d1,#4874d1, #4f4fc8);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.login::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 150%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.507), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.7s ease-in-out;
+}
+
+.login:hover::before {
+    left: 100%;
+}
+
+.login svg {
+    vertical-align: middle;
+    transition: color 0.3s ease-in-out;
+}
+
+.login:hover {
+    background-color: #4f4fc8;
+}
+
+.login:hover svg {
+    color: #ffffff;
+}
+.add-to-cart svg {
+    fill: rgb(110, 109, 109);
+    margin-left: 10px;
+    vertical-align: middle;
+    transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+}
+.add-to-cart svg:hover {
+    fill: #4874d1;
+
+}
+.dropdown-menu hr {
+    width: 70px;
+}
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    font-size: 15px;
+    padding-top: 3px;
+    width: 130px; /* عرض بیشتر برای جای دادن زیرمنو */
+    position: absolute;
+    top: 30px;
+    right: -30px; /* منوی اصلی در سمت چپ منوی والد قرار گیرد */
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    z-index: 1000;
+    transform: translateY(-10px);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.3s ease-in-out, opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+}
+
+.dropdown:hover .dropdown-menu {
+    transform: translateY(0); /* موقعیت نهایی منو */
+    opacity: 1; /* شفافیت نهایی منو */
+    visibility: visible; /* نمایش منو */
+}
+
+/* استایل برای زیرمنوی جدید */
+.submenu {
+    text-align: left;
+    font-size: 13px; 
+    position: absolute;
+    right: 97%; /* موقعیت در سمت راست منوی اصلی */
+    top: 0;
+    width: 150px; /* عرض منوی زیرمنو */
+    background-color: white;
+    border-radius: 6px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 1000;
+}
+
+.dropdown-menu > a:hover + .submenu,
+.submenu:hover {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+/* استایل برای لینک‌های منو */
+.dropdown-menu a,
+.submenu a {
+    color: black;
+    padding: 8px 12px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-menu a:hover,
+.submenu a:hover {
+    background: linear-gradient(90deg, rgba(7,100,196,1) 0%, rgba(45,45,158,1) 0%, rgba(0,206,255,1) 100%);
+    color: white;
+}
+
+.main-content {
+    margin-left: 120px;
+    display: flex;
+    padding: 70px 100px;
+    gap: 20px;
+    margin-right: 120px;
+}
+
+.daily-discount {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    flex: 0 0 15%;
+    background-color: #fcfcfc;
+    padding: 10px 0px 30px 0px;
+    border-radius: 10px;
+    height: 527px;
+    color: rgb(201, 201, 201);
+}
+
+.discount-items {
+    
+    display: flex;
+    flex-direction: column; /* حالت پیش‌فرض ستون */
+}
+
+.discount-item {
+    border-bottom: solid 1px #c5c5c5;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    color: black;
+    padding: 5px 10px;
+    transition: ease 0.3s;
+}
+
+.discount-item:hover {
+    border-radius: 5px;
+    color: white;
+    background-color: #4874d1;
+    border: none;
+    transform: scale(1.05);
+
+}
+
+.grid-view .discount-items {
+  
+  
+    padding: 0;
+    margin-bottom: -124px;
+
+}
+
+.hidden {
+    display: none;
+}
+
+h2 {
+    color: #4874d1;
+    font-size: 20px;
+    font-weight: 500;
+    font-style: normal;
+    text-align: right;
+    margin-bottom: 70px;
+    margin-right: 15px;
+    margin-top: 5px;
+}
+.daily-discount hr {
+   margin-bottom: 0px;
+    height: 1px;
+   background-color: #c5c5c5;
+   border: none;
+   transition: all 0.5s;
+   -webkit-transition: all 0.5s;
+   -moz-transition: all 0.5s;
+   -ms-transition: all 0.5s;
+   -o-transition: all 0.5s;
+
+}
+.more-item {
+    cursor: pointer;
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    color: #5e5e5e;
+    transition: all 0.3s;
+}
+.more-item:hover {
+    color: #1b1b1b;
+}
+.discount-item img {
+    border-radius: 5px;
+    padding: 5px;
+    background-color: white;
+    width: 30px;
+    height: 30px;
+    min-height: 25px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+.item-name {
+    text-align: right;
+    flex: 1;
+}
+
+/*  */
+.slider-container {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    z-index: 10; /* اضافه کردن z-index بالاتر برای اسلایدر */
+}
+
+.slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    cursor: grab;
+    gap: 20px;
+}
+
+.slider.grabbing {
+    cursor: grabbing;
+}
+
+.slide {
+    min-width: calc(100% - 20px);
+    user-select: none;
+    transition: transform 0.5s ease-in-out;
+    box-sizing: border-box;
+}
+
+.slide img {
+    display: block;
+    width: 100%;
+    border-radius: 10px;
+    -webkit-user-drag: none;
+    
+}
+
+.controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    padding: 0 20px;
+    box-sizing: border-box;
+    pointer-events: none;
+}
+
+.controls .prev, .controls .next {
+    cursor: pointer;
+    font-size: 30px;
+    color: #ffffff;
+    padding: 10px;
+    margin-right: 20px;
+    border-radius: 50%;
+    pointer-events: all;
+    transition: all 0.3s;
+}
+
+.controls .prev:hover, .controls .next:hover {
+    color: #7ca2f3;
+}
+.dots {
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    bottom: 30px;
+    text-align: center;
+    padding: 6px 0;
+}
+
+.dot {
+    cursor: pointer;
+    height: 10px;
+    width: 10px;
+    margin: 0 5px;
+    background-color: #5a5959;
+    border-radius: 50%;
+    display: inline-block;
+    transition: ease 0.5s;
+}
+
+.dot.active {
+    border-radius: 30px;
+    width: 30px;
+    background: linear-gradient(90deg, rgba(7,100,196,1) 0%, rgba(45,45,158,1) 0%, rgb(0, 184, 230) 100%);
+    box-shadow: 0 0 10px rgb(0, 140, 255), /* رنگ آبی برای درخشش */
+    0 0 20px rgba(0, 123, 255, 0.3),
+    0 0 30px rgba(0, 123, 255, 0.2),
+    rgba(0, 0, 0, 0.3) 0px 10px 15px; /* سایه اصلی */
+}
+
+
+/* Offer Products */
+.offer-products {
+    margin-top: -30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.offer-products .line {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #4874d1; /* رنگ خط */
+    border: none;
+    margin: 0 80px; /* فاصله بین خط و عنوان */
+}
+
+.offer-products .offer-title {
+    font-weight: 600;
+    margin: 0;
+    padding: 0; /* فاصله داخلی برای عنوان */
+    font-style: normal;
+    text-align: center;
+}
+
+.filter-container {
+    position: relative;
+    right: 60px;
+    width: 2000px;
+    margin: 0 auto;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: -60px;
+    
+}
+.filter-img {
+    margin: 50px 40px 0px 40px;
+
+    
+}
+.filter-img img {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+    -webkit-transition: transform 0.5s ease-in-out;
+    -moz-transition: transform 0.5s ease-in-out;
+    -ms-transition: transform 0.5s ease-in-out;
+    -o-transition: transform 0.5s ease-in-out;
+    
+}
+.filter-img img:hover {
+    transform: translateY(-10px);
+    animation: float 2s infinite ease-in-out 0.6s;
+
+    -webkit-animation: float 2s infinite ease-in-out 0.6s;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(-10px); /* موقعیت بالا */
+    }
+    50% {
+        transform: translateY(0px); /* بازگشت به حالت اولیه (وسط) */
+    }
+}
+h5 {
+    border-radius: 30px;
+    padding: 5px 2px;
+    margin-bottom: 10px;
+    transform: translateX(-50%);
+    left: 50%;
+    width: 150px;
+    background-color: #2959c2;
+    position: relative;
+    color: #ffffff;
+    margin-top: 45px;
+    font-size: 15px;
+    text-align: center;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease; /* بهبود انیمیشن */
+}
+
+h5:hover {
+    transform: translateX(-50%) translateY(-10px); /* حرکت به سمت بالا */
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 16px, rgba(17, 17, 26, 0.1) 0px 16px 24px, rgba(17, 17, 26, 0.1) 0px 24px 36px; /* سایه بیشتر */
+}
+
+
+.middle-end-section {
+    margin-top: 100px;
+    height: 400px;
+    width: 100%;
+    background: linear-gradient(-90deg, rgb(8, 94, 180) 0%, rgb(4, 87, 211) 0%, rgb(113, 18, 221) 100%);
+    box-shadow: 
+    0px -10px 60px rgba(0, 0, 0, 0.322), /* سایه بالا */
+    0px 0px 5px rgba(0, 0, 0, 0.507); /* سایه عمومی نرم */
+} 
+.end-start-section {
+    height: 300px;
+    width: 100%;
+
+} 
+.offer-products2 {
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: -30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.offer-products2 .line2,.line3 {
+    border-radius: 20px;
+    flex-grow: 12;
+    height: 3px;
+    background-color: #5b81d3;
+    /*رنگخط*/border: none;
+    margin: 30px 50px;  
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+.offer-products2 .line3 {
+    flex-grow: 1;
+}
+.offer-products2 .offer-title2 {
+    color: white;
+    font-weight: 600;
+    margin: 0;
+    padding: 0; /* فاصله داخلی برای عنوان */
+    font-style: normal;
+    text-align: center;
+}
+.offer-products2 svg {
+    font-weight: 700;
+    margin-left:10px;
+}
+
+.slider2 {
+    margin-left: 100px;
+    border-radius: 10px;
+    padding: 0px 10px;
+    background-color: white;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 1078px; /* تنظیم عرض اسلایدر به اندازه مطلوب */
+
+    height: 300px;
+}
+
+.card-container {
+    padding-top: 10px;
+    margin-top: 10px;
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+}
+
+.card-items {
+    margin-bottom: 100px;
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.card-item img {
+    transform: translateX(-50%);
+    left: 50%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+.card-item {
+    
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 5px 0px 5px 0px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 10px;
+    transition: transform 0.2s ease-in-out;
+}
+.card-item:hover {
+    transform: translateY(-10px);
+}
+.card-item img {
+    border-radius: 10px 10px 0px 0px;
+    height: 170px;
+    width: 150px;
+    object-fit: cover; /* این ویژگی باعث می‌شود تصویر به صورت مناسب بریده شود تا ابعادش حفظ شود */
+    object-position: center; /* این ویژگی مشخص می‌کند که تصویر از کدام قسمت بریده شود */
+}
+
+.card-item hr {
+    width: 120px;
+    margin-bottom: 2px;
+}
+.item-info {
+    position: relative;
+    left: 50%;
+    transform: translateX(-55%);
+    width: 140px;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: -10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: -10px;
+    justify-content: space-between;
+    align-items: center;
+    vertical-align: middle;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+}
+.game-name {
+    height: 40px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140px;
+    font-weight: 450;
+    margin-top: 10px;
+    color: rgb(77, 77, 77);
+    text-decoration: none;
+    text-align: center;
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+.item-info svg {
+    fill: #2959c2;
+}
+.toman {
+    font-size: 13px;
+    margin-left: 3px;
+    border-radius: 5px;
+    padding: 2px 5px;
+    color: white;
+    background-color: #533bf6;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+.off-div {
+    font-weight: 700;
+    font-size: 13px;
+    position: absolute;
+    z-index: 100;
+    background-color: rgb(231, 29, 97);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+.off-div p {
+    margin: 0;
+    padding: 0;
+}
+
+.scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #2959c2;
+    color: white;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s;
+}
+
+.prev2 {
+    border-radius: 0px 5px 5px 0px;
+    padding: 3px 5px 5px 0px;
+    font-size: 20px;
+    left: 0px;
+}
+
+.next2 {
+    border-radius: 5px 0px 0px 5px;
+    padding: 3px 0px 5px 5px;
+    font-size: 20px;
+    right: 0px;
+}
+.scroll-btn:hover {
+    transform: scale(1.2) translateY(-40%);
+}
+.timer-container {
+    position: relative;
+    width: 400px;
+    left: 1340px;
+    bottom: 250px;
+    text-align: center;
+    opacity: 0; /* شروع حالت مخفی */
+    transform: translateX(90%); /* انتقال به خارج از صفحه از سمت راست */
+}
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(30%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+
+.timer-container.visible {
+    animation: slideIn 1s ease-out forwards;
+}
+h1 {
+    margin-bottom: 20px;
+}
+
+#countdown {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-around;
+    font-size: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#countdown div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#countdown span {
+    font-size: 40px;
+    font-weight: bold;
+    color: #333;
+}
+
+.timer-name {
+    margin: 0 auto; /* به جای استفاده از margin-left، از margin: 0 auto استفاده کنید */
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    vertical-align: middle;
+}
+.timer-name svg {
+    margin-left: 10px;
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-sizing: border-box; /* اضافه کردن box-sizing برای جلوگیری از تغییر سایز غیرمنتظره */
+}
+.tree-section {
+    justify-content: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-image: url('src/png/psbackground.png'); /* مسیر به تصویر پس‌زمینه */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 50px; /* برای اضافه کردن فضا در اطراف */
+    border-radius: 15px; /* برای گوشه‌های گرد (اختیاری) */
+    overflow: hidden; /* برای جلوگیری از نمایش محتوا در خارج از بخش */
+}
+
+.tree {
+    
+    position: relative;
+    width: 6px;
+    background-color: #969696;
+    height: 600px;
+    border-radius: 3px;
+    margin-top: 0px;
+}
+
+.branch {
+    opacity: 0; /* پنهان کردن به طور پیش‌فرض */
+    transform: translateY(20px); /* جابجایی به سمت پایین به طور پیش‌فرض */
+    transition: opacity 0.5s ease, transform 0.5s ease; /* تنظیم انیمیشن */
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    position: absolute;
+    width: 310px;
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    color: white;
+    border-radius: 25px; /* برای گوشه‌های گرد */
+    background-color: #fff; /* رنگ پس‌زمینه برای وضوح بیشتر مثلث‌ها */
+}
+
+.branch.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.branch .icon {
+    font-size: 30px;
+    margin-right: 15px;
+}
+
+.branch2 .icon, 
+.branch4 .icon {
+    margin-left: 15px;
+    margin-right: 0;
+}
+
+.branch2, 
+.branch4 {
+    flex-direction: row-reverse;
+}
+
+.text-content {
+    height: auto;
+    text-align: center;
+    width: 100%;
+}
+
+.text {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.description {
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+.branch1 {
+    top: 0px;
+    left: -430px;
+    background-color: #3263eb;
+}
+
+.branch2 {
+    top: 150px;
+    right: -430px; /* تغییر مقدار right برای حرکت به سمت راست */
+    background-color: #4882ec;
+}
+
+.branch3 {
+    top: 295px;
+    left: -430px;
+    background-color: #07a4ff;
+}
+
+.branch4 {
+    top: 440px;
+    right: -430px; /* تغییر مقدار right برای حرکت به سمت راست */
+    background-color: #4f8eec;
+}
+
+/* مثلث‌ها در وسط سمت راست یا چپ */
+.branch::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+
+.branch1::before {
+    top: 50%;
+    right: -20px; /* موقعیت مثلث در سمت راست */
+    border-width: 20px 0 20px 20px;
+    border-color: transparent transparent transparent #3263eb;
+    transform: translateY(-50%);
+}
+
+.branch2::before {
+    top: 50%;
+    left: -20px; /* موقعیت مثلث در سمت چپ */
+    border-width: 20px 20px 20px 0;
+    border-color: transparent #4882ec transparent transparent;
+    transform: translateY(-50%);
+}
+
+.branch3::before {
+    top: 50%;
+    right: -20px; /* موقعیت مثلث در سمت راست */
+    border-width: 20px 0 20px 20px;
+    border-color: transparent transparent transparent #07a4ff;
+    transform: translateY(-50%);
+}
+
+.branch4::before {
+    top: 50%;
+    left: -20px; /* موقعیت مثلث در سمت چپ */
+    border-width: 20px 20px 20px 0;
+    border-color: transparent #4f8eec transparent transparent;
+    transform: translateY(-50%);
+}
+
+
+::-webkit-scrollbar {
+    width: 8px; /* عرض نوار اسکرول */
+    height: 8px; /* عرض نوار اسکرول افقی */
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1; /* رنگ پس‌زمینه نوار اسکرول */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #1f88df; /* رنگ کش نوار اسکرول */
+    border-radius: 10px; /* گوشه‌های گرد */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555; /* رنگ کش نوار اسکرول در حالت hover */
+}
+
+/* استایل نوار اسکرول برای مرورگرهای Gecko (Firefox) */
+html {
+    scrollbar-width: thin; /* عرض نوار اسکرول باریک */
+    scrollbar-color: #1f88df #f1f1f1; /* رنگ کش و پس‌زمینه نوار اسکرول */
+}
+
+/* استایل نوار اسکرول برای مرورگرهای Edge */
+@supports (-ms-overflow-style: none) {
+    .scrollable-container {
+        -ms-overflow-style: none; /* مخفی کردن نوار اسکرول در Edge */
+    }
+    .scrollable-container::-ms-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+    .scrollable-container::-ms-scrollbar-track {
+        background: #f1f1f1;
+    }
+    .scrollable-container::-ms-scrollbar-thumb {
+        background: #888;
+        border-radius: 10px;
+    }
+    .scrollable-container::-ms-scrollbar-thumb:hover {
+        background: #555;
+    }
+}
+@media (max-width: 1900px) {
+    .navbar-container {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .promo-text {
+        font-size: 16px;
+    }
+
+    .view-btn {
+        margin-right: 0;
+        margin-top: 10px;
+        font-size: 12px;
+    }
+
+    .daily-discount {
+        flex: 0 0 100%;
+        padding: 10px;
+        height: auto;
+        margin-bottom: 20px;
+    }
+
+    .main-content {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .slider-container {
+        width: 100%;
+    }
+
+    .slider2 {
+        max-width: 100%;
+        margin-left: 0;
+    }
+
+    .offer-products,
+    .offer-products2 {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .card-item {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .card-item img {
+        width: 100%;
+        height: auto;
+    }
+
+    .item-info {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* مدیا کوئری برای سایزهای موبایل و تبلت */
+@media (max-width: 768px) {
+    
+    .logo {
+        display: none;
+    }
+    .timer-container {
+        display: none;
+    }
+    .promo-text {
+        font-size: 14px;
+    }
+
+    .view-btn {
+        font-size: 10px;
+        padding: 5px 10px;
+    }
+
+    .login {
+        padding: 5px 10px;
+    }
+
+    .navbar-container {
+        flex-direction: column;
+    }
+
+    .slider-container {
+        margin: 0;
+        width: 100%;
+    }
+
+    .card-item img {
+        height: 150px;
+    }
+
+    .item-info {
+        font-size: 12px;
+    }
+
+    .toman {
+        font-size: 11px;
+    }
+    .middle-end-section {
+          display: none;
+    }
+}
+.offer-products3 {
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.offer-products3 .line4,.line5 {
+    border-radius: 20px;
+    flex-grow: 12;
+    height: 2px;
+    background-color: #ff7300;
+    /*رنگخط*/border: none;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+.line5 {
+    margin-right: 100px;
+    margin-left: 20px;
+}
+.line4 {
+    margin-right: 20px;
+    margin-left: 100px;
+
+}
+.offer-products3 .line5 {
+    flex-grow: 1;
+}
+.offer-products3 i {
+    color: #ff7300;
+    margin-left:10px;
+    font-size: 20px;
+}
+
+
+.offer-products3 .offer-title3 {
+    color: #ff7300;
+    font-weight: 600;
+    margin: 0;
+    padding: 0; /* فاصله داخلی برای عنوان */
+    font-style: normal;
+    text-align: center;
+    font-size: 15px;
+}
+
+.slider3 {
+    transform: translateX(-50%);
+    left: 50%;
+    border-radius: 10px;
+    padding: 0px 10px;
+    background-color: white;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 1258px;/* تنظیم عرض اسلایدر به اندازه مطلوب */
+    height: 300px;
+    margin-bottom: 100px;
+    margin-top: 40px;
+}
+
+.card-container2 {
+    padding-top: 10px;
+    margin-top: 10px;
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    background-color: #f3f3f3;
+    border-radius: 10px;
+}
+
+.card-items2 {
+    opacity: 0;
+    margin-bottom: 100px;
+    display: flex;
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+}
+.card-item2 img {
+    transform: translateX(-50%);
+    left: 50%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.card-item2 {
+
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 5px 0px 5px 0px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 10px;
+    transition: transform 0.2s ease-in-out;
+}
+.card-item2:hover {
+    transform: translateY(-10px);
+}
+.card-item2 img {
+    border-radius: 10px 10px 0px 0px;
+    height: 180px;
+    width: 150px;
+    object-fit: cover; /* این ویژگی باعث می‌شود تصویر به صورت مناسب بریده شود تا ابعادش حفظ شود */
+    object-position: center; /* این ویژگی مشخص می‌کند که تصویر از کدام قسمت بریده شود */
+}
+
+.card-item2 hr {
+    width: 120px;
+    margin-bottom: 2px;
+}
+.prev3 {
+    border-radius: 5px;
+    padding: 3px 5px;
+    font-size: 20px;
+    left: 0px;
+}
+
+.next3 {
+    margin-left: 100px;
+    border-radius: 5px;
+    padding: 3px 5px;
+    font-size: 20px;
+    right: 0px;
+}
+.mid-banner {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    width: 1400px;
+    left: 50%;
+    position: relative;
+    transform: translateX(-50%);
+    height: 200px;
+    margin: 50px 0px;
+    padding-bottom: 10px;
+    border-radius: 10px;
+
+}
+.offer-products4 {
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.offer-products4 .line6,.line7 {
+    border-radius: 20px;
+    flex-grow: 12;
+    height: 2px;
+    background-color: #40dd2c;
+    /*رنگخط*/border: none;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+.line7 {
+    margin-right: 100px;
+    margin-left: 20px;
+}
+.line6 {
+    margin-right: 20px;
+    margin-left: 100px;
+
+}
+.offer-products4 .line7 {
+    flex-grow: 1;
+}
+.offer-products4 i {
+    color: #40dd2c;
+    margin-left:10px;
+    font-size: 20px;
+}
+
+
+.offer-products4 .offer-title4 {
+    color: #40dd2c;
+    font-weight: 600;
+    margin: 0;
+    padding: 0; /* فاصله داخلی برای عنوان */
+    font-style: normal;
+    text-align: center;
+    font-size: 15px;
+}
+.slider4 {
+    transform: translateX(-50%);
+    left: 50%;
+    border-radius: 10px;
+    padding: 0px 10px;
+    background-color: white;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 1258px;
+        margin-bottom: 100px;
+    height: 300px;
+    margin-top: 40px;
+}
+
+.card-container3 {
+    padding-top: 10px;
+    margin-top: 10px;
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    background-color: #f3f3f3;
+    border-radius: 10px;
+}
+
+.card-items3 {
+    opacity: 0;
+    margin-bottom: 100px;
+    display: flex;
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+    
+}
+
+.card-item3 img {
+    transform: translateX(-50%);
+    left: 50%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+.card-item3 {
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 5px 0px 5px 0px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 10px;
+    transition: all 0.2s ease-in-out;
+
+}
+.card-item3:hover {
+    transform: translateY(-10px) ;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+.card-item3 img {
+    border-radius: 10px 10px 0px 0px;
+    height: 180px;
+    width: 150px;
+    object-fit: cover; /* این ویژگی باعث می‌شود تصویر به صورت مناسب بریده شود تا ابعادش حفظ شود */
+    object-position: center; /* این ویژگی مشخص می‌کند که تصویر از کدام قسمت بریده شود */
+}
+
+.card-item3 hr {
+    width: 120px;
+    margin-bottom: 2px;
+}
+.prev4 {
+    border-radius: 5px;
+    padding: 3px 5px;
+    font-size: 20px;
+    left: 0px;
+}
+
+.next4 {
+    margin-left: 100px;
+    border-radius: 5px;
+    padding: 3px 5px;
+    font-size: 20px;
+    right: 0px;
+}
+.offer-products5 {
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.offer-products5 .line8,.line9 {
+    border-radius: 20px;
+    flex-grow: 12;
+    height: 2px;
+    background-color: #dd2c2c;
+    /*رنگخط*/border: none;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+.line9 {
+    margin-right: 100px;
+    margin-left: 20px;
+}
+.line8 {
+    margin-right: 20px;
+    margin-left: 100px;
+}
+.offer-products5 .line9{
+    flex-grow: 1;
+}
+.offer-products5 i {
+    color: #dd2c2c;
+    margin-left:10px;
+    font-size: 20px;
+}
+
+
+.offer-products5 .offer-title5 {
+    color: #dd2c2c;
+    font-weight: 600;
+    margin: 0;
+    padding: 0; /* فاصله داخلی برای عنوان */
+    font-style: normal;
+    text-align: center;
+    font-size: 15px;
+}
+.slider5 {
+    transform: translateX(-50%);
+    left: 50%;
+    border-radius: 10px;
+    padding: 0px 10px;
+    background-color: white;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 1258px; /* تنظیم عرض اسلایدر به اندازه مطلوب */
+    margin-bottom: 100px;
+    height: 300px;
+    margin-top: 40px;
+}
+
+.card-container4 {
+    padding-top: 10px;
+    margin-top: 10px;
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    background-color: #f3f3f3;
+    border-radius: 10px;
+}
+@keyframes popIn {
+    0% {
+
+        opacity: 0;
+    }
+    100% {
+
+        opacity: 1;
+    }
+}
+.card-items4.visible {
+    animation: popIn 1s forwards;
+    
+}
+.card-items3.visible {
+    animation: popIn 1s forwards;
+    
+}
+.card-items2.visible {
+    animation: popIn 1s forwards;
+    
+}
+
+.card-items4 {
+    opacity: 0;
+    margin-bottom: 100px;
+    display: flex;
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+}
+
+.card-item4 img {
+    transform: translateX(-50%);
+    left: 50%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+.card-item4 {
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 5px 0px 5px 0px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 10px;
+    transition: transform 0.2s ease-in-out;
+}
+.card-item4:hover {
+    transform: translateY(-10px);
+}
+.card-item4 img {
+    border-radius: 10px 10px 0px 0px;
+    height: 180px;
+    width: 150px;
+    object-fit: cover; /* این ویژگی باعث می‌شود تصویر به صورت مناسب بریده شود تا ابعادش حفظ شود */
+    object-position: center; /* این ویژگی مشخص می‌کند که تصویر از کدام قسمت بریده شود */
+}
+
+.card-item4 hr {
+    width: 120px;
+    margin-bottom: 2px;
+}
+.prev5 {
+    border-radius: 5px;
+    padding: 3px 5px;
+    font-size: 20px;
+    left: 0px;
+}
+
+.next5 {
+    margin-left: 100px;
+    border-radius: 5px;
+    padding: 3px 5px;
+    font-size: 20px;
+    right: 0px;
+}
+.why {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    font-size: 60px;
+    margin-top: 100px;
+    margin-bottom: 10px;
+    font-weight: 700;
+    color: #2959c2;
+}
+footer {
+    border-radius: 30px 30px 0px 0px;
+    transform: translateX(-50%);
+    position: relative;
+    left: 50%;
+    justify-content: center;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    margin-top: 30px;
+    width: 80%;
+    background: linear-gradient(90deg, rgba(7,100,196,1) 0%, rgba(45,45,158,1) 0%, rgb(0, 184, 230) 100%);
+    color: rgb(255, 255, 255);
+    padding: 40px 20px;
+
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-logo, .footer-links, .footer-newsletter, .footer-social {
+    flex: 1;
+    min-width: 250px;
+    padding: 10px;
+}
+
+
+.footer-logo h2 {
+    color: white;
+    font-size: 30px;
+    margin-bottom: 10px;
+
+}
+
+.footer-links h3, .footer-newsletter h3, .footer-social h3 {
+
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.footer-links ul {
+    color: #ffffff;
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    color: #0084ff;
+    margin: 8px 0;
+}
+
+.footer-links a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+
+.footer-newsletter form {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-newsletter input[type="email"] {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.footer-newsletter button {
+    color: white;
+    padding: 10px;
+    background-color: #20d31a;
+    border: none;
+    border-radius: 4px;
+    color: ECDFCC;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.footer-newsletter button:hover {
+    background-color: #4ebd2a;
+}
+
+.footer-social .social-icons {
+    display: flex;
+    gap: 10px;
+}
+
+.social-icons a {
+    font-size: 24px;
+    color: #ffffff;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-icons a:hover {
+    transform: scale(1.1);
+
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    border-top: 1px solid #ffffff;
+    padding-top: 20px;
+}
+
+.footer-bottom p {
+    margin: 0;
+
+}
+
+/* رسانه‌های واکنش‌گرا */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-logo, .footer-links, .footer-newsletter, .footer-social {
+        min-width: 100%;
+        padding: 20px 0;
+    }
+
+    .footer-newsletter input[type="email"] {
+        width: 100%;
+    }
+
+    .footer-newsletter button {
+        width: 100%;
+    }
+
+    .footer-social .social-icons {
+        justify-content: center;
+    }
+}
+.articles-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 500px;
+}
+.article-row {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 50px;
+
+}
+
+.article-item {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0px 15px 0px;
+    max-width: 480px;
+}
+
+.article-image {
+    width: 200px; /* عرض تصویر */
+    height: 120px; /* ارتفاع تصویر */
+    object-fit: cover;
+    border-radius: 8px 0px 0px 8px;
+
+}
+
+.article-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.article-title {
+    font-weight: bold;
+    text-align: right;
+    font-size: 1.1em;
+    margin: 5px 0;
+    color: #333;
+}
+
+.article-description {
+    text-align: right;
+    font-size: 0.9em;
+    color: #666;
+    margin: 5px 0px 0px 10px;
+}
+
+.article-author {
+    text-align: right;
+    font-size: 0.8em;
+    color: #999;
+    margin-top: 10px;
+    margin-left: 150px;
+}
+.weblog {
+    font-size: 25px;
+    color: rgb(73, 73, 73);
+    text-align: center;
+}
+.webloga {
+    text-decoration: none;
+    transition: all 0.3s;
+}
+.webloga:hover {
+    
+    transform: scale(1.05);
+}

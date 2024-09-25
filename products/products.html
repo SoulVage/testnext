@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محصولات نکست شاپ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../products/items/style.css">
+    <link rel="icon" href="../src/png/logo.png">
+</head>
+<body>
+    <header class="navbar-container">
+        <div class="navbar-left">
+            <a class="login" href="../Login/login.html">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M480-492.31q-57.75 0-98.87-41.12Q340-574.56 340-632.31q0-57.75 41.13-98.87 41.12-41.13 98.87-41.13 57.75 0 98.87 41.13Q620-690.06 620-632.31q0 57.75-41.13 98.88-41.12 41.12-98.87 41.12ZM180-187.69v-88.93q0-29.38 15.96-54.42 15.96-25.04 42.66-38.5 59.3-29.07 119.65-43.61 60.35-14.54 121.73-14.54t121.73 14.54q60.35 14.54 119.65 43.61 26.7 13.46 42.66 38.5Q780-306 780-276.62v88.93H180Zm60-60h480v-28.93q0-12.15-7.04-22.5-7.04-10.34-19.11-16.88-51.7-25.46-105.42-38.58Q534.7-367.69 480-367.69q-54.7 0-108.43 13.11-53.72 13.12-105.42 38.58-12.07 6.54-19.11 16.88-7.04 10.35-7.04 22.5v28.93Zm240-304.62q33 0 56.5-23.5t23.5-56.5q0-33-23.5-56.5t-56.5-23.5q-33 0-56.5 23.5t-23.5 56.5q0 33 23.5 56.5t56.5 23.5Zm0-80Zm0 384.62Z"/></svg>
+                ثبت نام / ورود
+            </a>
+            <a class="add-to-cart" href="">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M286.15-97.69q-29.15 0-49.57-20.43-20.42-20.42-20.42-49.57 0-29.16 20.42-49.58 20.42-20.42 49.57-20.42 29.16 0 49.58 20.42 20.42 20.42 20.42 49.58 0 29.15-20.42 49.57-20.42 20.43-49.58 20.43Zm387.7 0q-29.16 0-49.58-20.43-20.42-20.42-20.42-49.57 0-29.16 20.42-49.58 20.42-20.42 49.58-20.42 29.15 0 49.57 20.42t20.42 49.58q0 29.15-20.42 49.57Q703-97.69 673.85-97.69ZM240.61-730 342-517.69h272.69q3.46 0 6.16-1.73 2.69-1.73 4.61-4.81l107.31-195q2.31-4.23.38-7.5-1.92-3.27-6.54-3.27h-486Zm-28.76-60h555.38q24.54 0 37.11 20.89 12.58 20.88 1.2 42.65L677.38-494.31q-9.84 17.31-26.03 26.96-16.2 9.66-35.5 9.66H324l-46.31 84.61q-3.08 4.62-.19 10 2.88 5.39 8.65 5.39h457.69v60H286.15q-40 0-60.11-34.5-20.12-34.5-1.42-68.89l57.07-102.61L136.16-810H60v-60h113.85l38 80ZM342-517.69h280-280Z"/></svg>
+            </a>
+        </div>
+        <div class="navbar-items">
+            <a href="../index.html">خانه</a>
+            <div class="dropdown">
+                <a href="../products/products.html" class="dropdown-toggle">محصولات</a>
+                <div class="dropdown-menu">
+                    <a href="../products/products.html">بازی ها</a>
+                    <div class="submenu">
+                        <a href="../products/products.html">تمام بازی ها</a>
+                        <a href="../products/products.html?platform=پلی%20استیشن">پلی استیشن</a>
+                        <a href="../products/products.html?platform=ایکس%20باکس">ایکس باکس</a>
+                    </div>
+                    <a href="../products/products.html?search=Steam">ولت استیم</a>
+                    <a href="../products/products.html?search=Battle">بتل پس</a>
+                    <a href="../products/products.html?search=nitro">نیترو بوست</a>
+                </div>
+            </div>
+            <a href="../aboutus/aboutus.html">درباره ما</a>
+            <a href="../f&q/quest.html">سوالات</a>
+            <a href="../support/support.html">پشتیبانی</a>
+            <div class="logo">
+                <a href="../index.html">نکــست شاپ
+                    <img src="../src/png/logo.png" alt="لگو نکست شاپ">
+                </a>
+            </div>
+        </div>
+    </header>
+    <div class="bt-container">
+        <div class="breadcrumb" id="breadcrumb"> 
+            <a class="filter-chart" href="../index.html">خانه</a>&nbsp;&nbsp;>&nbsp;&nbsp;
+            <a class="filter-chart" href="../products/products.html">محصولات</a>&nbsp;&nbsp;>&nbsp;&nbsp;
+            <a class="filter-chart" href="#">دسته بندی</a>&nbsp;&nbsp;>&nbsp;&nbsp;
+            <span id="category-span">همه</span>
+        </div>
+
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="نام محصول را جستجو کنید" oninput="searchProducts()" />
+            <i class="fa fa-search search-icon"></i>
+        </div>
+    </div>
+    <hr class="hr1">
+    <h2>: فیلتر ها</h2>
+                <div class="active-filters" id="active-filters"></div>
+                <aside class="filter">
+                    <h2>فیلترها</h2>
+                    <ul class="ul">
+                        <li><button class="filtersbutton" onclick="applyFilter('cheapest')">ارزان‌ترین</button></li>
+                        <li><button class="filtersbutton" onclick="applyFilter('expensive')">گران‌ترین</button></li>
+                        <li><button class="filtersbutton" onclick="applyFilter('discount')">تخفیف‌دار</button></li>
+                        <li><button class="filtersbutton" onclick="applyFilter('newest')">جدیدترین</button></li>
+                    </ul>
+        
+                    <h2>دسته‌بندی‌ها</h2>
+                    <ul class="ul">
+                        <ul class="ul">
+                            <li><button class="filtersbutton2" onclick="applyPlatformFilter('همه')">All</button></li>
+                            <li><button class="filtersbutton2" onclick="applyPlatformFilter('استیم')">Steam</button></li>
+                            <li><button class="filtersbutton2" onclick="applyPlatformFilter('ایکس باکس')">Xbox</button></li>
+                            <li><button class="filtersbutton2" onclick="applyPlatformFilter('بتل نت')">BattleNet</button></li>
+                            <li><button class="filtersbutton2" onclick="applyPlatformFilter('پلی استیشن')">PlayStation</button></li>
+                        </ul>
+                        
+                    </ul>
+                    <h2>سایر</h2>                    
+                    <ul class="ul">
+                        <li><button class="filtersbutton3" onclick="applyPlatformFilter('گیفت کارت')">گیفت کارت</button></li>
+                        <li><button class="filtersbutton3" onclick="applyPlatformFilter('سرویس')">سرویس ها</button></li>
+                        <li><button class="filtersbutton3" onclick="applyPlatformFilter('دیسکورد')">نیترو بوست</button></li>
+                        <li><button class="filtersbutton3" onclick="applyPlatformFilter('بتل پس')">بتل پس ها </button></li>
+                    </ul>
+                    
+                </ul>   
+                    <div class="filtered-product-count" id="filtered-product-count">
+                        تعداد محصول یافت شده: 0
+                    </div>
+                    
+                </aside>
+                <div class="container">
+
+       
+
+        <main class="product-section" id="product-section">
+
+    </main>   
+
+    </div>
+    <div id="pagination">
+        <button id="prevPage" onclick="prevPage()"><</button>
+        <span id="currentPage">1</span>
+        <button id="nextPage" onclick="nextPage()">></button>
+    </div>
+    <section class="articles-section">
+        <section class="article-row">
+            <a class="webloga" href="file:///C:/Users/Admin/Desktop/8-Game%20Shop%20Project%202024.08.24/weblog/weblog.html?id=1">
+            <article class="article-item">
+                <img src="../src/png/blog1.jpg" alt="مقاله اول" class="article-image">
+                <div class="article-content">
+                    <h2 class="article-title"> خوب نیست gta چرا بازی</h2>
+                    <p class="article-description">این توضیحات مربوط رت خلاصه توضیح می‌دهد.</p>
+                    <p class="article-author">نویسنده:  نامعلوم</p>
+                </div>
+            </article>
+        </a>
+            <a class="webloga" href="file:///C:/Users/Admin/Desktop/8-Game%20Shop%20Project%202024.08.24/weblog/weblog.html?id=0">
+            <article class="article-item">
+                <img src="../src/png/blog2.jpg" alt="مقاله دوم" class="article-image">
+                <div class="article-content">
+                    <h2 class="article-title">چرا انقدر باگ داشت؟ cyberpunk</h2>
+                    <p class="article-description">این توضیحات مربوت خلاصه توضیح می‌دهد.</p>
+                    <p class="article-author">نویسنده: نامعلوم</p>
+                </div>
+            </article>
+        </a>
+
+        </section>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-logo">
+                <h2>نکست شاپ</h2>
+                <p>یکی از بهترین فروشگاه های انلاین ایران</p>
+            </div>
+            <div class="footer-links">
+                <h3>لینک های سریع </h3>
+                <ul>
+                    <li><a href="#">خانه</a></li>
+                    <li><a href="#">محصولات</a></li>
+                    <li><a href="#">درباره ما</a></li>
+                    <li><a href="#">سوالات</a></li>
+                    <li><a href="#">پشتیبانی</a></li>
+                </ul>
+            </div>
+            <div class="footer-newsletter">
+                <h3>اخبار ما رو دنبال کن</h3>
+                <form action="#">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit">دنبال کردن</button>
+                </form>
+            </div>
+            <div class="footer-social">
+                <h3>فضای مجازی ما</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 NextShop. All rights reserved.</p>
+        </div>
+    </footer>
+    <script>
+        // آرایه محصولات تعریف شده از قبل
+        const products = [
+        { id: 0, name: 'Grand Theft Auto V', imageUrl: '../src/png/Card/gtav.jpg', price: 720000, hasDiscount: true, discount: 20, platform: 'استیم', link: '../products/gameinfo.html?id=0' },
+        { id: 1, name: 'FC 24', imageUrl: '../src/png/Card/fc24.jpg', price: 2150000, hasDiscount: true, discount: 35, platform: 'استیم', link: '../products/gameinfo.html?id=1' },
+        { id: 2, name: 'Elden Ring', imageUrl: '../src/png/Card/eldenring.jpg', price: 663000, hasDiscount: true, discount: 64, platform: 'استیم', link: '../products/gameinfo.html?id=2' },
+        { id: 3, name: 'Fortnite Vbucks Gift Card', imageUrl: '../src/png/Card/vbucks.jpeg', price: 663000, hasDiscount: true, discount: 64, platform: 'اپیک  ', link: '../products/gameinfo.html?id=3' },
+        { id: 4, name: 'Tom Clancys Rainbow Six Siege', imageUrl: '../src/png/Card/rainbow.jpg', price: 394000, hasDiscount: true, discount: 6, platform: 'استیم', link: '../products/gameinfo.html?id=4' },
+        { id: 5, name: 'Uncharted 4', imageUrl: '../src/png/Card/uncharted4.jpg', price: 432000, hasDiscount: false, discount: 0, platform: 'پلی استیشن', link: '../products/gameinfo.html?id=5' },
+        { id: 6, name: 'God Of War 4', imageUrl: '../src/png/Card/gow.jpg', price: 1150000, hasDiscount: false, discount: 0, platform: 'پلی استیشن', link: '../products/gameinfo.html?id=6' },
+        { id: 7, name: 'Fifa 20', imageUrl: '../src/png/Card/fifa20.jpg', price: 563000, hasDiscount: false, discount: 0, platform: 'پلی استیشن', link: '../products/gameinfo.html?id=7' },
+        { id: 8, name: 'Red Dead Redemption 2', imageUrl: '../src/png/Card/rdr2.jpg', price: 963000, hasDiscount: false, discount: 0, platform: 'استیم', link: '../products/gameinfo.html?id=8' },
+        { id: 9, name: 'Ghost Of Tsushima', imageUrl: '../src/png/Card/ghostoft.jpg', price: 363000, hasDiscount: false, discount: 0, platform: 'همه', link: '../products/gameinfo.html?id=9' },
+        { id: 10, name: 'Need For Speed Heat', imageUrl: '../src/png/Card/nfsheat.jpg', price: 1663000, hasDiscount: false, discount: 0, platform: 'استیم', link: '../products/gameinfo.html?id=10' },
+        { id: 11, name: 'Call Of Duty Ghosts', imageUrl: '../src/png/Card/codghost.jpg', price: 663000, hasDiscount: false, discount: 0, platform: 'بتل نت', link: '../products/gameinfo.html?id=11' },
+        { id: 12, name: 'Call Of Duty Black Ops 4', imageUrl: '../src/png/Card/codbo4.jpg', price: 963000, hasDiscount: false, discount: 0, platform: 'بتل نت', link: '../products/gameinfo.html?id=12' },
+        { id: 13, name: 'Call Of Duty Black Ops 3', imageUrl: '../src/png/Card/codbo3.jpg', price: 223000, hasDiscount: false, discount: 0, platform: 'بتل نت', link: '../products/gameinfo.html?id=13' },
+        { id: 15,name: 'Forza Horizon 3',imageUrl: '../src/png/Card/fh3.jpg',price: 432000,hasDiscount: false,discount: 0,platform: 'استیم',link: '../products/gameinfo.html?id=14' },
+        { id: 16,name: 'Minecraft',imageUrl: '../src/png/Card/minecraft.jpg',price: 1150000,hasDiscount: false,discount: 0,platform: 'همه', link: '../products/gameinfo.html?id=15'},
+        { id: 17,name: 'Cyberpunk 2077',imageUrl: '../src/png/Card/cyberpunk.jpg',price: 563000,hasDiscount: false,discount: 0,platform: 'استیم', link: '../products/gameinfo.html?id=16'},
+        { id: 18,name: 'Forza Horizon 4',imageUrl: '../src/png/Card/fh4.jpg',price: 963000,hasDiscount: false,discount: 0,platform: 'استیم', link: '../products/gameinfo.html?id=17'},
+        { id: 19,name: 'Call Of Duty Modern Warfare 3',imageUrl: '../src/png/Card/codmw3.jpg',price: 963000,hasDiscount: false,discount: 0,platform: 'بتل نت', link: '../products/gameinfo.html?id=18'},
+        { id: 20,name: 'Far Cry 5',imageUrl: '../src/png/Card/farcry5.jpg',price: 1663000,hasDiscount: false,discount: 0,platform: 'ایکس باکس', link: '../products/gameinfo.html?id=19'},
+        { id: 21,name: 'Far Cry 6',imageUrl: '../src/png/Card/farcry6.jpg',price: 663000,hasDiscount: false,discount: 0,platform: 'ایکس باکس', link: '../products/gameinfo.html?id=20'},
+        { id: 22,name: 'Watch Dogs',imageUrl: '../src/png/Card/watchdogs.jpg',price: 963000,hasDiscount: false,discount: 0,platform: 'استیم', link: '../products/gameinfo.html?id=21'},
+        { id: 23,name: 'Watch Dogs 2',imageUrl: '../src/png/Card/watchdogs2.jpg',price: 223000,hasDiscount: false,discount: 0,platform: 'استیم', link: '../products/gameinfo.html?id=22'},
+        { id: 24,name: 'Xbox Game Pass',imageUrl: '../src/png/Card/xboxgift.jpg',price: 432000,hasDiscount: false,discount: 0,platform: 'گیفت کارت', link: '../products/gameinfo.html?id=23'},
+        { id: 25,name: 'Steam Wallet Ukraine',imageUrl: '../src/png/Card/steamwalletukraine.jpg',price: 1150000,hasDiscount: false,discount: 0,platform: 'گیفت کارت', link: '../products/gameinfo.html?id=24'},
+        { id: 26,name: 'Google Play Gift Card',imageUrl: '../src/png/Card/googleplay.jpg',price: 563000,hasDiscount: false,discount: 0,platform: 'گیفت کارت', link: '../products/gameinfo.html?id=25'},
+        { id: 27,name: 'Ea Play Gift Card',imageUrl: '../src/png/Card/eaplay.jpg',price: 963000,hasDiscount: false,discount: 0,platform: 'گیفت کارت', link: '../products/gameinfo.html?id=26'},
+        { id: 28,name: 'Change Steam Reagon',imageUrl: '../src/png/Card/steamreagon.jpg',price: 363000,hasDiscount: false,discount: 0,platform: 'سرویس', link: '../products/gameinfo.html?id=27'},
+        { id: 29,name: 'Playstation Gift Card',imageUrl: '../src/png/Card/psgiftcard.jpeg',price: 1663000,hasDiscount: false,discount: 0,platform: 'گیفت کارت', link: '../products/gameinfo.html?id=28'},
+        { id: 30,name: 'Steam Wallet Usa',imageUrl: '../src/png/Card/steamwalletusa.jpg',price: 663000,hasDiscount: false,discount: 0,platform: 'گیفت کارت', link: '../products/gameinfo.html?id=29'},
+        { id: 31,name: 'Steam Wallet Brazil',imageUrl: '../src/png/Card/steamwalletbrazil.jpg',price: 963000,hasDiscount: false,discount: 0,platform: 'گیفت کارت', link: '../products/gameinfo.html?id=30'},
+        { id: 32,name: 'Apex Legends Gift Card',imageUrl: '../src/png/Card/apexgift.jpg',price: 223000,hasDiscount: false,discount: 0,platform: 'گیفت کارت', link: '../products/gameinfo.html?id=31'},
+
+
+    ];
+    
+    let activeFilters = [];
+
+    // تابع ساخت کارت محصول
+    function createProductCard(product) {
+        const card = document.createElement('div');
+        card.classList.add('card-item');
+        card.setAttribute('data-price', product.price);
+        card.setAttribute('data-discount', product.discount);
+        card.setAttribute('data-platform', product.platform);
+    
+        // بررسی وجود تخفیف
+        if (product.hasDiscount && product.discount > 0) {
+            const offDiv = document.createElement('div');
+            offDiv.classList.add('off-div');
+            offDiv.innerHTML = `<p>${product.discount}%</p>`;
+            card.appendChild(offDiv);
+        }
+    
+        const imageLink = document.createElement('a');
+        imageLink.href = product.link;
+        imageLink.target = '_blank';
+        const image = document.createElement('img');
+        image.src = product.imageUrl;
+        image.alt = product.name;
+        imageLink.appendChild(image);
+        card.appendChild(imageLink);
+    
+        const gameNameLink = document.createElement('a');
+        gameNameLink.href = product.link;
+        gameNameLink.target = '_blank';
+        gameNameLink.classList.add('game-name');
+        gameNameLink.textContent = product.name;
+        card.appendChild(gameNameLink);
+    
+        const itemInfo = document.createElement('div');
+        itemInfo.classList.add('item-info');
+        const svgIcon = `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M286.15-97.69q-29.15 0-49.57-20.43-20.42-20.42-20.42-49.57 0-29.16 20.42-49.58 20.42-20.42 49.57-20.42 29.16 0 49.58 20.42 20.42 20.42 20.42 49.58 0 29.15-20.42 49.57-20.42 20.43-49.58 20.43Zm387.7 0q-29.16 0-49.58-20.43-20.42-20.42-20.42-49.57 0-29.16 20.42-49.58 20.42-20.42 49.58-20.42 29.15 0 49.57 20.42t20.42 49.58q0 29.15-20.42 49.57Q703-97.69 673.85-97.69ZM240.61-730 342-517.69h272.69q3.46 0 6.16-1.73 2.69-1.73 4.61-4.81l107.31-195q2.31-4.23.38-7.5-1.92-3.27-6.54-3.27h-486Zm-28.76-60h555.38q24.54 0 37.11 20.89 12.58 20.88 1.2 42.65L677.38-494.31q-9.84 17.31-26.03 26.96-16.2 9.66-35.5 9.66H324l-46.31 84.61q-3.08 4.62-.19 10 2.88 5.39 8.65 5.39h457.69v60H286.15q-40 0-60.11-34.5-20.12-34.5-1.42-68.89l57.07-102.61L136.16-810H60v-60h113.85l38 80ZM342-517.69h280-280Z"/></svg>`;
+        itemInfo.innerHTML = `${svgIcon}<p>${product.price.toLocaleString()} <span class="toman">تومان</span></p>`;
+        card.appendChild(itemInfo);
+    
+        return card;
+    }
+    
+ // تابعی برای خواندن پارامترهای URL
+// تابعی برای خواندن پارامترهای URL
+// تابعی برای خواندن پارامترهای URL
+function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+}
+
+// تابع اعمال فیلتر پلتفرم
+function applyPlatformFilter(platform) {
+    console.log("فیلتر پلتفرم فعال شد: " + platform);
+    document.getElementById('active-filters').innerHTML = `فیلتر فعال: ${platform}`;
+    // اضافه کردن سایر کدهای فیلتر کردن محصولات
+}
+
+// تابع اعمال سایر فیلترها (ارزان‌ترین، گران‌ترین و ...)
+function applyFilter(filterType) {
+    console.log("فیلتر دیگر فعال شد: " + filterType);
+    document.getElementById('active-filters').innerHTML = `فیلتر فعال: ${filterType}`;
+    // اضافه کردن سایر کدهای فیلتر کردن محصولات
+}
+
+// اجرای کدها بعد از لود شدن صفحه
+window.onload = function() {
+    // دریافت پارامتر جستجو
+    const searchValue = getQueryParam('search');
+    if (searchValue) {
+        // قرار دادن مقدار پارامتر در ورودی جستجو
+        document.getElementById('search-input').value = searchValue;
+        // فراخوانی تابع جستجو به محض قرار دادن مقدار در ورودی
+        searchProducts();
+    }
+
+    // دریافت و اعمال فیلتر پلتفرم
+    const platformFilter = getQueryParam('platform');
+    if (platformFilter) {
+        applyPlatformFilter(platformFilter);
+    }
+
+    // دریافت و اعمال سایر فیلترها
+    const otherFilter = getQueryParam('filter');
+    if (otherFilter) {
+        applyFilter(otherFilter);
+    }
+};
+
+
+// اجرای تابع ب
+   
+     
+     
+     
+     // تابع جستجو محصولات بر اساس نام
+    function searchProducts() {
+    const searchInput = document.getElementById('search-input').value.toLowerCase();
+    const filteredProducts = products.filter(product => product.name.toLowerCase().includes(searchInput));
+
+    // نمایش محصولات فیلتر شده
+    displayProducts(filteredProducts);
+}
+
+    // تابعی برای نمایش محصولات
+    function displayProducts(filteredProducts) {
+        const productSection = document.getElementById('product-section');
+        productSection.innerHTML = ''; // پاک کردن محصولات قبلی
+    
+        // ساخت کارت برای هر محصول فیلتر شده
+        filteredProducts.forEach(product => {
+            const productCard = createProductCard(product);
+            productSection.appendChild(productCard);
+        });
+    
+        // به‌روزرسانی تعداد محصولات
+        updateProductCount(filteredProducts.length);
+    }
+    
+    
+    // به‌روزرسانی نمایش فیلترهای فعال
+// تابع فیلتر کردن محصولات
+function applyFilter(type) {
+    // اگر فیلتر 'cheapest' انتخاب شد، فیلتر 'expensive' را حذف کن و برعکس
+    if (type === 'cheapest' && activeFilters.includes('expensive')) {
+        activeFilters = activeFilters.filter(f => f !== 'expensive');
+    } else if (type === 'expensive' && activeFilters.includes('cheapest')) {
+        activeFilters = activeFilters.filter(f => f !== 'cheapest');
+    }
+
+    // اگر فیلتر از قبل فعال نیست، آن را اضافه کن
+    if (!activeFilters.includes(type)) {
+        activeFilters.push(type);
+    }
+
+    let filteredProducts = [...products];
+
+    // فیلترها را اعمال کن
+    if (type === 'cheapest') {
+        filteredProducts.sort((a, b) => a.price - b.price);
+    } else if (type === 'expensive') {
+        filteredProducts.sort((a, b) => b.price - a.price);
+    } else if (type === 'discount') {
+        filteredProducts = filteredProducts.filter(product => product.discount > 0);
+    } else if (type === 'newest') {
+        filteredProducts.sort((a, b) => b.id - a.id);
+    }
+
+    displayProducts(filteredProducts);
+    updateActiveFilters();
+}
+function updateProductCount(count) {
+    const countElement = document.getElementById('filtered-product-count');
+    countElement.textContent = `تعداد محصول یافت شده: ${count}`;
+}
+    
+// حذف فیلتر
+function removeFilter(filter) {
+    activeFilters = activeFilters.filter(f => f !== filter);
+    updateActiveFilters();
+
+    // بازگرداندن محصولات به حالت اولیه یا اعمال فیلترهای باقی‌مانده
+    if (activeFilters.length === 0) {
+        displayProducts(products); // نمایش تمام محصولات
+    } else {
+        let filteredProducts = [...products];
+        activeFilters.forEach(f => {
+            if (f === 'cheapest') {
+                filteredProducts.sort((a, b) => a.price - b.price);
+            } else if (f === 'expensive') {
+                filteredProducts.sort((a, b) => b.price - a.price);
+            } else if (f === 'discount') {
+                filteredProducts = filteredProducts.filter(product => product.discount > 0);
+            } else if (f === 'newest') {
+                filteredProducts.sort((a, b) => b.id - a.id);
+            }
+        });
+        displayProducts(filteredProducts);
+    }
+}
+
+// به‌روزرسانی نمایش فیلترهای فعال
+function updateActiveFilters() {
+    const activeFiltersContainer = document.getElementById('active-filters');
+    activeFiltersContainer.innerHTML = ''; // پاک کردن فیلترهای قبلی
+
+    activeFilters.forEach(filter => {
+        const filterLabel = document.createElement('div');
+        filterLabel.classList.add('filter-label');
+        filterLabel.textContent = filter;
+
+        const removeButton = document.createElement('button');
+        removeButton.textContent = 'X';
+        removeButton.onclick = () => removeFilter(filter);
+        
+        filterLabel.appendChild(removeButton);
+        activeFiltersContainer.appendChild(filterLabel);
+    });
+}
+
+    // تابعی برای خواندن پارامترهای URL
+
+
+// تابع اعمال فیلتر پلتفرم
+
+    // تابع فیلتر بر اساس پلتفرم و به‌روز‌رسانی breadcrumb
+    function applyPlatformFilter(platform) {
+        document.getElementById('category-span').textContent = platform;
+    
+        let filteredProducts;
+    
+        if (platform === 'همه') {
+            filteredProducts = products;
+        } else {
+            filteredProducts = products.filter(product => product.platform === platform);
+        }
+    
+        displayProducts(filteredProducts);
+    }
+    
+    // نمایش تمام محصولات در ابتدا
+    displayProducts(products);
+    
+        
+    let currentPage = 1;
+    const itemsPerPage = 21;
+    
+    function displayProductsWithPagination(productsArray) {
+        const productSection = document.getElementById('product-section');
+        productSection.innerHTML = ''; // پاک کردن محصولات قبلی
+    
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        const paginatedProducts = productsArray.slice(startIndex, endIndex);
+    
+        // ساخت کارت برای هر محصول در صفحه فعلی
+        paginatedProducts.forEach(product => {
+            const productCard = createProductCard(product);
+            productSection.appendChild(productCard);
+        });
+    
+        // به‌روزرسانی تعداد محصولات
+        updateProductCount(productsArray.length);
+    
+        // به‌روزرسانی نمایش شماره صفحه
+        document.getElementById('currentPage').textContent = currentPage;
+    
+        // کنترل دکمه‌های بعد و قبل
+        document.getElementById('prevPage').disabled = currentPage === 1;
+        document.getElementById('nextPage').disabled = endIndex >= productsArray.length;
+    }
+    
+    function nextPage() {
+        currentPage++;
+        displayProductsWithPagination(products);
+    }
+    
+    function prevPage() {
+        currentPage--;
+        displayProductsWithPagination(products);
+    }
+    
+    // نمایش محصولات با صفحه‌بندی در ابتدا
+    displayProductsWithPagination(products);
+    
+        </script>
+        
+        
+    
+    
+</body>
+</html>

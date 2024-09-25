@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../src/png/logo.png">
+    <title>ساپورت - نکست شاپ</title>
+    <style>
+        * {
+            font-family: "Rubik", sans-serif;
+
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            font-family: "Rubik", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 500;
+            font-style: normal;
+            scroll-behavior: smooth;
+            position: relative; /* برای موقعیت‌دهی لایه پس‌زمینه */
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100vh;
+
+        }
+        .navbar-container {
+            padding: 20px 100% 20px ;
+            background-color: #fff;
+            width: 80%;
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            left: 50%;
+            
+            vertical-align: middle;
+            text-align: center;
+            align-items: center;
+            transform: translateX(-50%);
+            z-index: 6000;
+            margin-bottom: 150px;
+        }
+        
+        .navbar-items ,.navbar-items a{
+            align-items: center;
+            display: flex;
+            flex-direction: row;
+            gap: 30px;
+            text-decoration: none;
+            color: rgb(0, 0, 0);
+            transition: ease 0.3s;
+            -webkit-transition: ease 0.3s;
+            -moz-transition: ease 0.3s;
+            -ms-transition: ease 0.3s;
+            -o-transition: ease 0.3s;
+        }
+        .navbar-items a:hover {
+            color: #4874d1;
+        }
+        .logo img {
+            margin-left: -15px;
+            align-items: center;
+            width: 40px;
+            vertical-align: middle;
+        }
+        .logo {
+            margin-left: 50px;
+            align-items: center;
+            display: flex;
+            flex-direction: row;
+            vertical-align: middle;
+        }
+        .logo a{
+            font-size: 22px;
+            font-weight: 700;
+        }
+        .login {
+            border-radius: 20px;
+            padding: 7px 15px;
+            color: white;
+            background: linear-gradient(120deg, #4874d1,#4874d1, #4f4fc8);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            transition: background-color 0.3s ease-in-out;
+        }
+        
+        .login::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 150%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.507), transparent);
+            transform: skewX(-20deg);
+            transition: left 0.7s ease-in-out;
+        }
+        
+        .login:hover::before {
+            left: 100%;
+        }
+        
+        .login svg {
+            vertical-align: middle;
+            transition: color 0.3s ease-in-out;
+        }
+        
+        .login:hover {
+            background-color: #4f4fc8;
+        }
+        
+        .login:hover svg {
+            color: #ffffff;
+        }
+        .add-to-cart svg {
+            fill: rgb(110, 109, 109);
+            margin-left: 10px;
+            vertical-align: middle;
+            transition: all 0.3s;
+            -webkit-transition: all 0.3s;
+            -moz-transition: all 0.3s;
+            -ms-transition: all 0.3s;
+            -o-transition: all 0.3s;
+        }
+        .add-to-cart svg:hover {
+            fill: #4874d1;
+        
+        }
+        .dropdown-menu hr {
+            width: 70px;
+        }
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-menu {
+            font-size: 15px;
+            padding-top: 3px;
+            width: 130px; /* عرض بیشتر برای جای دادن زیرمنو */
+            position: absolute;
+            top: 30px;
+            right: -30px; /* منوی اصلی در سمت چپ منوی والد قرار گیرد */
+            background-color: white;
+            border-radius: 6px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transform: translateY(-10px);
+            opacity: 0;
+            visibility: hidden;
+            transition: transform 0.3s ease-in-out, opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+        }
+        
+        .dropdown:hover .dropdown-menu {
+            transform: translateY(0); /* موقعیت نهایی منو */
+            opacity: 1; /* شفافیت نهایی منو */
+            visibility: visible; /* نمایش منو */
+        }
+        
+        /* استایل برای زیرمنوی جدید */
+        .submenu {
+            text-align: left;
+            font-size: 13px; 
+            position: absolute;
+            right: 97%; /* موقعیت در سمت راست منوی اصلی */
+            top: 0;
+            width: 150px; /* عرض منوی زیرمنو */
+            background-color: white;
+            border-radius: 6px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .dropdown-menu > a:hover + .submenu,
+        .submenu:hover {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+        
+        /* استایل برای لینک‌های منو */
+        .dropdown-menu a,
+        .submenu a {
+            color: black;
+            padding: 8px 12px;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .dropdown-menu a:hover,
+        .submenu a:hover {
+            background: linear-gradient(90deg, rgba(7,100,196,1) 0%, rgba(45,45,158,1) 0%, rgba(0,206,255,1) 100%);
+            color: white;
+        }
+        img:nth-child(2) {
+           bottom: 70px; 
+           width: 800px;
+           position: relative;
+           left: 50%;
+           transform: translateX(-50%);
+        }
+        h1 {
+            
+            font-weight: 400;
+            text-align: center;
+        }
+        h4 {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            margin-right: 40px;
+            color: rgba(63, 63, 63, 0.568);
+            font-weight: 400;
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar-container">
+        <div class="navbar-left">
+            <a class="login" href="../Login/login.html">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M480-492.31q-57.75 0-98.87-41.12Q340-574.56 340-632.31q0-57.75 41.13-98.87 41.12-41.13 98.87-41.13 57.75 0 98.87 41.13Q620-690.06 620-632.31q0 57.75-41.13 98.88-41.12 41.12-98.87 41.12ZM180-187.69v-88.93q0-29.38 15.96-54.42 15.96-25.04 42.66-38.5 59.3-29.07 119.65-43.61 60.35-14.54 121.73-14.54t121.73 14.54q60.35 14.54 119.65 43.61 26.7 13.46 42.66 38.5Q780-306 780-276.62v88.93H180Zm60-60h480v-28.93q0-12.15-7.04-22.5-7.04-10.34-19.11-16.88-51.7-25.46-105.42-38.58Q534.7-367.69 480-367.69q-54.7 0-108.43 13.11-53.72 13.12-105.42 38.58-12.07 6.54-19.11 16.88-7.04 10.35-7.04 22.5v28.93Zm240-304.62q33 0 56.5-23.5t23.5-56.5q0-33-23.5-56.5t-56.5-23.5q-33 0-56.5 23.5t-23.5 56.5q0 33 23.5 56.5t56.5 23.5Zm0-80Zm0 384.62Z"/></svg>
+                ثبت نام / ورود
+            </a>
+            <a class="add-to-cart" href="">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M286.15-97.69q-29.15 0-49.57-20.43-20.42-20.42-20.42-49.57 0-29.16 20.42-49.58 20.42-20.42 49.57-20.42 29.16 0 49.58 20.42 20.42 20.42 20.42 49.58 0 29.15-20.42 49.57-20.42 20.43-49.58 20.43Zm387.7 0q-29.16 0-49.58-20.43-20.42-20.42-20.42-49.57 0-29.16 20.42-49.58 20.42-20.42 49.58-20.42 29.15 0 49.57 20.42t20.42 49.58q0 29.15-20.42 49.57Q703-97.69 673.85-97.69ZM240.61-730 342-517.69h272.69q3.46 0 6.16-1.73 2.69-1.73 4.61-4.81l107.31-195q2.31-4.23.38-7.5-1.92-3.27-6.54-3.27h-486Zm-28.76-60h555.38q24.54 0 37.11 20.89 12.58 20.88 1.2 42.65L677.38-494.31q-9.84 17.31-26.03 26.96-16.2 9.66-35.5 9.66H324l-46.31 84.61q-3.08 4.62-.19 10 2.88 5.39 8.65 5.39h457.69v60H286.15q-40 0-60.11-34.5-20.12-34.5-1.42-68.89l57.07-102.61L136.16-810H60v-60h113.85l38 80ZM342-517.69h280-280Z"/></svg>
+            </a>
+        </div>
+        <div class="navbar-items">
+            <a href="../index.html">خانه</a>
+            <div class="dropdown">
+                <a href="../products/products.html" class="dropdown-toggle">محصولات</a>
+                <div class="dropdown-menu">
+                    <a href="../products/products.html">بازی ها</a>
+                    <div class="submenu">
+                        <a href="../products/products.html">تمام بازی ها</a>
+                        <a href="../products/products.html?platform=پلی%20استیشن">پلی استیشن</a>
+                        <a href="../products/products.html?platform=ایکس%20باکس">ایکس باکس</a>
+                    </div>
+                    <a href="../products/products.html?search=Steam">ولت استیم</a>
+                    <a href="../products/products.html?search=Battle">بتل پس</a>
+                    <a href="../products/products.html?search=nitro">نیترو بوست</a>
+                </div>
+            </div>
+            <a href="../aboutus/aboutus.html">درباره ما</a>
+            <a href="../f&q/quest.html">سوالات</a>
+            <a href="../support/support.html">پشتیبانی</a>
+            <div class="logo">
+                <a href="../index.html">نکــست شاپ
+                    <img src="../src/png/logo.png" alt="لگو نکست شاپ">
+                </a>
+            </div>
+        </div>
+    </header>
+    <img src="../src/png/notfound.png" alt="">
+    <h1 data-text="صفحه مورد نظر درحال ساخت">... صفحه مورد نظر درحال ساخت است</h1>
+    <h4>2024 NextShop. All rights reserved.</h4>
+
+</body>
+</html>

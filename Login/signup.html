@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../src/png/logo.png">
+    <title>ورود به حساب - نکست شاپ</title>
+    <style>
+        * {
+            font-family: "Rubik", sans-serif;
+
+        }
+        body {
+            background: rgb(166,114,255);
+            background: linear-gradient(90deg, rgba(166,114,255,1) 0%, rgba(2,125,236,1) 100%);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            font-family: "Rubik", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 500;
+            font-style: normal;
+            scroll-behavior: smooth;
+            position: relative; /* برای موقعیت‌دهی لایه پس‌زمینه */
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100vh;
+
+        }
+        .navbar-container {
+            padding: 20px 100% 20px ;
+            background-color: #fff;
+            width: 80%;
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            left: 50%;
+            
+            vertical-align: middle;
+            text-align: center;
+            align-items: center;
+            transform: translateX(-50%);
+            z-index: 6000;
+            margin-bottom: 150px;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+        }
+        
+        .navbar-items ,.navbar-items a{
+            align-items: center;
+            display: flex;
+            flex-direction: row;
+            gap: 30px;
+            text-decoration: none;
+            color: rgb(0, 0, 0);
+            transition: ease 0.3s;
+            -webkit-transition: ease 0.3s;
+            -moz-transition: ease 0.3s;
+            -ms-transition: ease 0.3s;
+            -o-transition: ease 0.3s;
+        }
+        .navbar-items a:hover {
+            color: #4874d1;
+        }
+        .logo img {
+            margin-left: -15px;
+            align-items: center;
+            width: 40px;
+            vertical-align: middle;
+        }
+        .logo {
+            margin-left: 50px;
+            align-items: center;
+            display: flex;
+            flex-direction: row;
+            vertical-align: middle;
+        }
+        .logo a{
+            font-size: 22px;
+            font-weight: 700;
+        }
+        .login {
+            border-radius: 20px;
+            padding: 7px 15px;
+            color: white;
+            background: linear-gradient(120deg, #4874d1,#4874d1, #4f4fc8);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            transition: background-color 0.3s ease-in-out;
+        }
+        
+        .login::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 150%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.507), transparent);
+            transform: skewX(-20deg);
+            transition: left 0.7s ease-in-out;
+        }
+        
+        .login:hover::before {
+            left: 100%;
+        }
+        
+        .login svg {
+            vertical-align: middle;
+            transition: color 0.3s ease-in-out;
+        }
+        
+        .login:hover {
+            background-color: #4f4fc8;
+        }
+        
+        .login:hover svg {
+            color: #ffffff;
+        }
+        .add-to-cart svg {
+            fill: rgb(110, 109, 109);
+            margin-left: 10px;
+            vertical-align: middle;
+            transition: all 0.3s;
+            -webkit-transition: all 0.3s;
+            -moz-transition: all 0.3s;
+            -ms-transition: all 0.3s;
+            -o-transition: all 0.3s;
+        }
+        .add-to-cart svg:hover {
+            fill: #4874d1;
+        
+        }
+        .dropdown-menu hr {
+            width: 70px;
+        }
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-menu {
+            font-size: 15px;
+            padding-top: 3px;
+            width: 130px; /* عرض بیشتر برای جای دادن زیرمنو */
+            position: absolute;
+            top: 30px;
+            right: -30px; /* منوی اصلی در سمت چپ منوی والد قرار گیرد */
+            background-color: white;
+            border-radius: 6px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transform: translateY(-10px);
+            opacity: 0;
+            visibility: hidden;
+            transition: transform 0.3s ease-in-out, opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+        }
+        
+        .dropdown:hover .dropdown-menu {
+            transform: translateY(0); /* موقعیت نهایی منو */
+            opacity: 1; /* شفافیت نهایی منو */
+            visibility: visible; /* نمایش منو */
+        }
+        
+        /* استایل برای زیرمنوی جدید */
+        .submenu {
+            text-align: left;
+            font-size: 13px; 
+            position: absolute;
+            right: 97%; /* موقعیت در سمت راست منوی اصلی */
+            top: 0;
+            width: 150px; /* عرض منوی زیرمنو */
+            background-color: white;
+            border-radius: 6px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .dropdown-menu > a:hover + .submenu,
+        .submenu:hover {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+        
+        /* استایل برای لینک‌های منو */
+        .dropdown-menu a,
+        .submenu a {
+            color: black;
+            padding: 8px 12px;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .dropdown-menu a:hover,
+        .submenu a:hover {
+            background: linear-gradient(90deg, rgba(7,100,196,1) 0%, rgba(45,45,158,1) 0%, rgba(0,206,255,1) 100%);
+            color: white;
+        }
+        .login-container {
+            
+            margin: -70px auto 0px;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+        }
+        
+        .login-form h2 {
+            text-align: center;
+            margin-bottom: 60px;
+            color: #333;
+        }
+        
+        .input-group {
+            margin-bottom: 15px;
+        }
+        
+        .input-group label {
+            
+            display: block;
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .input-wrapper {
+            
+            position: relative;
+        }
+        
+        .input-wrapper input {
+            border-bottom: 1px solid #dadada;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            width: 83%;
+            padding: 10px 40px 10px 10px; /* فضایی برای SVG سمت راست */
+            font-size: 14px;
+            transition: all 0.1s;
+        }
+
+        .input-wrapper svg {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            fill: #a8a8a8;
+        }
+        
+        button {
+            margin-top: 30px;
+            width: 100%;
+            padding: 10px;
+            background: rgb(137,16,236);
+            background: linear-gradient(90deg, rgba(137,16,236,1) 21%, rgba(2,125,236,1) 100%);
+            border: none;
+            color: #fff;
+            font-size: 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        button:hover {
+            transform: scale(1.06);
+            background-color: #0056b3;
+        }
+        .fp {
+            cursor: pointer;
+            text-align: right;
+            font-size: 14px;
+            font-weight: 400;
+            color: #4fa6ee;
+        }
+        .social-container{
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+
+        }
+        .osuw {
+            
+            font-weight: 400;
+            color: #bebebe;
+            font-size: 14px;
+            text-align: center;
+        }
+        .svg-social{
+            margin-top: 10px;
+            border-radius: 50%;
+            background-color: rgb(235, 235, 235);
+            padding: 5px;
+            width: 30px;
+            height: 30px;
+            transition: all 0.3s;
+
+        }
+        .svg-social:hover{
+            background-color: rgb(203, 217, 247);
+
+        }
+        .make-acc {
+            margin-top: 60px;
+            line-height: 10px;
+            text-align: center;
+        }
+        .make-acc p {
+            font-weight: 400;
+            color: #494949;
+            font-size: 16px;
+        }
+        .make-acc a {
+            font-weight: 600;
+            color: #363636;
+            font-size: 16px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .make-acc a:hover {
+
+            color: #2778f1;
+
+        }
+        input:focus {
+            outline: none;
+            border-bottom: 2px solid #b8b8b8;
+
+        }
+        h4 {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            margin-right: 40px;
+            color: rgba(255, 255, 255, 0.568);
+            font-weight: 400;
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar-container">
+        <div class="navbar-left">
+            <a class="login" href="../Login/login.html">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M480-492.31q-57.75 0-98.87-41.12Q340-574.56 340-632.31q0-57.75 41.13-98.87 41.12-41.13 98.87-41.13 57.75 0 98.87 41.13Q620-690.06 620-632.31q0 57.75-41.13 98.88-41.12 41.12-98.87 41.12ZM180-187.69v-88.93q0-29.38 15.96-54.42 15.96-25.04 42.66-38.5 59.3-29.07 119.65-43.61 60.35-14.54 121.73-14.54t121.73 14.54q60.35 14.54 119.65 43.61 26.7 13.46 42.66 38.5Q780-306 780-276.62v88.93H180Zm60-60h480v-28.93q0-12.15-7.04-22.5-7.04-10.34-19.11-16.88-51.7-25.46-105.42-38.58Q534.7-367.69 480-367.69q-54.7 0-108.43 13.11-53.72 13.12-105.42 38.58-12.07 6.54-19.11 16.88-7.04 10.35-7.04 22.5v28.93Zm240-304.62q33 0 56.5-23.5t23.5-56.5q0-33-23.5-56.5t-56.5-23.5q-33 0-56.5 23.5t-23.5 56.5q0 33 23.5 56.5t56.5 23.5Zm0-80Zm0 384.62Z"/></svg>
+                ثبت نام / ورود
+            </a>
+            <a class="add-to-cart" href="">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M286.15-97.69q-29.15 0-49.57-20.43-20.42-20.42-20.42-49.57 0-29.16 20.42-49.58 20.42-20.42 49.57-20.42 29.16 0 49.58 20.42 20.42 20.42 20.42 49.58 0 29.15-20.42 49.57-20.42 20.43-49.58 20.43Zm387.7 0q-29.16 0-49.58-20.43-20.42-20.42-20.42-49.57 0-29.16 20.42-49.58 20.42-20.42 49.58-20.42 29.15 0 49.57 20.42t20.42 49.58q0 29.15-20.42 49.57Q703-97.69 673.85-97.69ZM240.61-730 342-517.69h272.69q3.46 0 6.16-1.73 2.69-1.73 4.61-4.81l107.31-195q2.31-4.23.38-7.5-1.92-3.27-6.54-3.27h-486Zm-28.76-60h555.38q24.54 0 37.11 20.89 12.58 20.88 1.2 42.65L677.38-494.31q-9.84 17.31-26.03 26.96-16.2 9.66-35.5 9.66H324l-46.31 84.61q-3.08 4.62-.19 10 2.88 5.39 8.65 5.39h457.69v60H286.15q-40 0-60.11-34.5-20.12-34.5-1.42-68.89l57.07-102.61L136.16-810H60v-60h113.85l38 80ZM342-517.69h280-280Z"/></svg>
+            </a>
+        </div>
+        <div class="navbar-items">
+            <a href="../index.html">خانه</a>
+            <div class="dropdown">
+                <a href="../products/products.html" class="dropdown-toggle">محصولات</a>
+                <div class="dropdown-menu">
+                    <a href="../products/products.html">بازی ها</a>
+                    <div class="submenu">
+                        <a href="../products/products.html">تمام بازی ها</a>
+                        <a href="../products/products.html?platform=پلی%20استیشن">پلی استیشن</a>
+                        <a href="../products/products.html?platform=ایکس%20باکس">ایکس باکس</a>
+                    </div>
+                    <a href="../products/products.html?search=Steam">ولت استیم</a>
+                    <a href="../products/products.html?search=Battle">بتل پس</a>
+                    <a href="../products/products.html?search=nitro">نیترو بوست</a>
+                </div>
+            </div>
+            <a href="../aboutus/aboutus.html">درباره ما</a>
+            <a href="../f&q/quest.html">سوالات</a>
+            <a href="../support/support.html">پشتیبانی</a>
+            <div class="logo">
+                <a href="../index.html">نکــست شاپ
+                    <img src="../src/png/logo.png" alt="لگو نکست شاپ">
+                </a>
+            </div>
+        </div>
+    </header>
+         
+    <div class="login-container">
+        <form class="login-form">
+            <h2>ساخت حساب</h2>
+            <div class="input-group">
+                <label for="username">نام کاربری</label>
+                <div class="input-wrapper">
+                    <input type="text" id="username" name="username" placeholder="نام کاربری خود را وارد کنید" required>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed">
+                        <path d="M480-492.31q-57.75 0-98.87-41.12Q340-574.56 340-632.31q0-57.75 41.13-98.87 41.12-41.13 98.87-41.13 57.75 0 98.87 41.13Q620-690.06 620-632.31q0 57.75-41.13 98.88-41.12 41.12-98.87 41.12ZM180-187.69v-88.93q0-29.38 15.96-54.42 15.96-25.04 42.66-38.5 59.3-29.07 119.65-43.61 60.35-14.54 121.73-14.54t121.73 14.54q60.35 14.54 119.65 43.61 26.7 13.46 42.66 38.5Q780-306 780-276.62v88.93H180Zm60-60h480v-28.93q0-12.15-7.04-22.5-7.04-10.34-19.11-16.88-51.7-25.46-105.42-38.58Q534.7-367.69 480-367.69q-54.7 0-108.43 13.11-53.72 13.12-105.42 38.58-12.07 6.54-19.11 16.88-7.04 10.35-7.04 22.5v28.93Zm240-304.62q33 0 56.5-23.5t23.5-56.5q0-33-23.5-56.5t-56.5-23.5q-33 0-56.5 23.5t-23.5 56.5q0 33 23.5 56.5t56.5 23.5Zm0-80Zm0 384.62Z"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="input-group">
+                <label for="password">رمز عبور</label>
+                <div class="input-wrapper">
+                    <input type="password" id="password" name="password" placeholder="رمز عبور  خود را وارد کنید" required>
+                    <svg class="svg2" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M240-80q-33 0-56.5-23.5T160-160v-400q0-33 23.5-56.5T240-640h40v-80q0-83 58.5-141.5T480-920q83 0 141.5 58.5T680-720v80h40q33 0 56.5 23.5T800-560v400q0 33-23.5 56.5T720-80H240Zm0-80h480v-400H240v400Zm240-120q33 0 56.5-23.5T560-360q0-33-23.5-56.5T480-440q-33 0-56.5 23.5T400-360q0 33 23.5 56.5T480-280ZM360-640h240v-80q0-50-35-85t-85-35q-50 0-85 35t-35 85v80ZM240-160v-400 400Z"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="input-group">
+                <label for="password">شماره همراه</label>
+                <div class="input-wrapper">
+                    <input type="password" id="password" name="password" placeholder=" شماره همراه خود را وارد کنید" required>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed">
+                        <path d="M777.61-140q-113.07 0-227.19-52.58-114.11-52.58-209.69-148.34-95.57-95.77-148.15-209.7Q140-664.54 140-777.61q0-18.17 12-30.28T182-820h130.46q15.15 0 26.73 9.89 11.58 9.88 14.73 24.42L376.85-668q2.38 16.38-1 28.15-3.39 11.77-12.16 19.77l-92.38 89.93q22.3 40.84 50.96 77.27 28.65 36.42 62.04 69.57 32.92 32.93 70 61.16 37.08 28.23 80.08 52.54l89.76-90.54q9.39-9.77 22.74-13.7 13.34-3.92 27.73-1.92l111.07 22.62q15.15 4 24.73 15.46t9.58 26V-182q0 18-12.11 30t-30.28 12ZM242.92-586.92l71.39-68.31q1.92-1.54 2.5-4.23.58-2.69-.19-5l-17.39-89.39q-.77-3.07-2.69-4.61-1.92-1.54-5-1.54H206q-2.31 0-3.85 1.54-1.53 1.54-1.53 3.85 3.07 41 13.42 83.3 10.34 42.31 28.88 84.39Zm348 345.69q39.77 18.54 82.96 28.35 43.2 9.8 80.73 11.65 2.31 0 3.85-1.54t1.54-3.85v-84.15q0-3.08-1.54-5t-4.61-2.69l-84-17.08q-2.31-.77-4.04-.19-1.73.58-3.66 2.5l-71.23 72Zm-348-345.69Zm348 345.69Z"/>
+                    </svg>
+                </div>
+            </div>
+            <button type="submit">ورود</button>
+            <p class="osuw">یا ورود با </p>
+             <div class="social-container">
+                <svg class="svg-social" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 48 48" width="48px" height="48px">
+                    <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/><path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/><path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/><path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"/>
+                </svg>
+                <svg class="svg-social" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 48 48" width="48px" height="48px">
+                    <path fill="#8c9eff" d="M40,12c0,0-4.585-3.588-10-4l-0.488,0.976C34.408,10.174,36.654,11.891,39,14c-4.045-2.065-8.039-4-15-4s-10.955,1.935-15,4c2.346-2.109,5.018-4.015,9.488-5.024L18,8c-5.681,0.537-10,4-10,4s-5.121,7.425-6,22c5.162,5.953,13,6,13,6l1.639-2.185C13.857,36.848,10.715,35.121,8,32c3.238,2.45,8.125,5,16,5s12.762-2.55,16-5c-2.715,3.121-5.857,4.848-8.639,5.815L33,40c0,0,7.838-0.047,13-6C45.121,19.425,40,12,40,12z M17.5,30c-1.933,0-3.5-1.791-3.5-4c0-2.209,1.567-4,3.5-4s3.5,1.791,3.5,4C21,28.209,19.433,30,17.5,30z M30.5,30c-1.933,0-3.5-1.791-3.5-4c0-2.209,1.567-4,3.5-4s3.5,1.791,3.5,4C34,28.209,32.433,30,30.5,30z"/>
+                </svg>
+                <svg class="svg-social" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 48 48" width="48px" height="48px">
+                    <path fill="#7e57c2" d="M42,27.676c-3,3.441-6,6.882-9,10.324c-2.333,0-4.667,0-7,0c-2.333,2-4.667,4-7,6c-1,0-2,0-3,0	c0-2,0-4,0-6c-3.333,0-6.667,0-10,0c0-7.431,0-14.863,0-22.294C7.455,12.804,8.909,9.902,10.364,7C20.909,7,31.455,7,42,7	C42,13.892,42,20.784,42,27.676z"/><path fill="#fafafa" d="M39,26.369c-1.667,1.877-3.333,3.754-5,5.631c-2.333,0-4.667,0-7,0c-2.333,2-4.667,4-7,6c0-2,0-4,0-6	c-2.667-0.008-5.333-0.016-8-0.024c0-7.326,0-14.651,0-21.976c9,0,18,0,27,0C39,15.456,39,20.912,39,26.369z"/><rect width="3" height="10" x="21" y="16" fill="#7e57c2"/><rect width="3" height="10" x="30" y="16" fill="#7e57c2"/>
+                </svg>
+                <svg class="svg-social" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 48 48" width="48px" height="48px">
+                    <linearGradient id="_osn9zIN2f6RhTsY8WhY4a" x1="10.341" x2="40.798" y1="8.312" y2="38.769" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#2aa4f4"/><stop offset="1" stop-color="#007ad9"/></linearGradient><path fill="url(#_osn9zIN2f6RhTsY8WhY4a)" d="M46.105,11.02c-1.551,0.687-3.219,1.145-4.979,1.362c1.789-1.062,3.166-2.756,3.812-4.758	c-1.674,0.981-3.529,1.702-5.502,2.082C37.86,8.036,35.612,7,33.122,7c-4.783,0-8.661,3.843-8.661,8.582	c0,0.671,0.079,1.324,0.226,1.958c-7.196-0.361-13.579-3.782-17.849-8.974c-0.75,1.269-1.172,2.754-1.172,4.322	c0,2.979,1.525,5.602,3.851,7.147c-1.42-0.043-2.756-0.438-3.926-1.072c0,0.026,0,0.064,0,0.101c0,4.163,2.986,7.63,6.944,8.419	c-0.723,0.198-1.488,0.308-2.276,0.308c-0.559,0-1.104-0.063-1.632-0.158c1.102,3.402,4.299,5.889,8.087,5.963	c-2.964,2.298-6.697,3.674-10.756,3.674c-0.701,0-1.387-0.04-2.065-0.122C7.73,39.577,12.283,41,17.171,41	c15.927,0,24.641-13.079,24.641-24.426c0-0.372-0.012-0.742-0.029-1.108C43.483,14.265,44.948,12.751,46.105,11.02"/>
+                </svg>
+             </div>
+             <div class="make-acc">
+                <p>آیا حساب کاربری دارید؟</p>
+                <a href="login.html">ورود به حساب </a>
+             </div>
+
+        </form>
+    </div>
+    <h4>2024 NextShop. All rights reserved.</h4>
+</body>
+</html>

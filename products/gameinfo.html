@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../src/png/logo.png">
+    
+    <title>مشخصات محصول</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            font-family: "Rubik", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 500;
+            font-style: normal;
+            scroll-behavior: smooth;
+            position: relative; /* برای موقعیت‌دهی لایه پس‌زمینه */
+            height: 120vh; /* اطمینان از پوشش کامل صفحه */
+            background-repeat: no-repeat;
+            background-size: cover;
+            backdrop-filter: blur(5px);
+        }
+
+        .background {
+            
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70%;
+    background-size: cover; /* تصویر به اندازه کامل صفحه کشیده می‌شود */
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.8; /* مقدار شفافیت دلخواه */
+    z-index: -1; /* قرار دادن لایه در پشت محتوای اصلی */
+}
+
+        .navbar-container {
+            padding: 20px 100% 20px ;
+            background-color: #fff;
+            width: 80%;
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            left: 50%;
+            vertical-align: middle;
+            text-align: center;
+            align-items: center;
+            transform: translateX(-50%);
+            z-index: 6000;
+            margin-bottom: 150px;
+        
+        }
+        
+        .navbar-items ,.navbar-items a{
+            align-items: center;
+            display: flex;
+            flex-direction: row;
+            gap: 30px;
+            text-decoration: none;
+            color: rgb(0, 0, 0);
+            transition: ease 0.3s;
+            -webkit-transition: ease 0.3s;
+            -moz-transition: ease 0.3s;
+            -ms-transition: ease 0.3s;
+            -o-transition: ease 0.3s;
+        }
+        .navbar-items a:hover {
+            color: #4874d1;
+        }
+        .logo img {
+            margin-left: -15px;
+            align-items: center;
+            width: 40px;
+            vertical-align: middle;
+        }
+        .logo {
+            margin-left: 50px;
+            align-items: center;
+            display: flex;
+            flex-direction: row;
+            vertical-align: middle;
+        }
+        .logo a{
+            font-size: 22px;
+            font-weight: 700;
+        }
+        .login {
+            border-radius: 20px;
+            padding: 7px 15px;
+            color: white;
+            background: linear-gradient(120deg, #4874d1,#4874d1, #4f4fc8);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            transition: background-color 0.3s ease-in-out;
+        }
+        
+        .login::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 150%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.507), transparent);
+            transform: skewX(-20deg);
+            transition: left 0.7s ease-in-out;
+        }
+        
+        .login:hover::before {
+            left: 100%;
+        }
+        
+        .login svg {
+            vertical-align: middle;
+            transition: color 0.3s ease-in-out;
+        }
+        
+        .login:hover {
+            background-color: #4f4fc8;
+        }
+        
+        .login:hover svg {
+            color: #ffffff;
+        }
+        .add-to-cart svg {
+            fill: rgb(110, 109, 109);
+            margin-left: 10px;
+            vertical-align: middle;
+            transition: all 0.3s;
+            -webkit-transition: all 0.3s;
+            -moz-transition: all 0.3s;
+            -ms-transition: all 0.3s;
+            -o-transition: all 0.3s;
+        }
+        .add-to-cart svg:hover {
+            fill: #4874d1;
+        
+        }
+        .dropdown-menu hr {
+            width: 70px;
+        }
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-menu {
+            font-size: 15px;
+            padding-top: 3px;
+            width: 130px; /* عرض بیشتر برای جای دادن زیرمنو */
+            position: absolute;
+            top: 30px;
+            right: -30px; /* منوی اصلی در سمت چپ منوی والد قرار گیرد */
+            background-color: white;
+            border-radius: 6px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transform: translateY(-10px);
+            opacity: 0;
+            visibility: hidden;
+            transition: transform 0.3s ease-in-out, opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+        }
+        
+        .dropdown:hover .dropdown-menu {
+            transform: translateY(0); /* موقعیت نهایی منو */
+            opacity: 1; /* شفافیت نهایی منو */
+            visibility: visible; /* نمایش منو */
+        }
+        
+        /* استایل برای زیرمنوی جدید */
+        .submenu {
+            text-align: left;
+            font-size: 13px; 
+            position: absolute;
+            right: 97%; /* موقعیت در سمت راست منوی اصلی */
+            top: 0;
+            width: 150px; /* عرض منوی زیرمنو */
+            background-color: white;
+            border-radius: 6px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .dropdown-menu > a:hover + .submenu,
+        .submenu:hover {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+        
+        /* استایل برای لینک‌های منو */
+        .dropdown-menu a,
+        .submenu a {
+            color: black;
+            padding: 8px 12px;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .dropdown-menu a:hover,
+        .submenu a:hover {
+            background: linear-gradient(90deg, rgba(7,100,196,1) 0%, rgba(45,45,158,1) 0%, rgba(0,206,255,1) 100%);
+            color: white;
+        }
+
+        .product-container {
+            width: 1000px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: row;
+            text-align: right;
+            border-radius: 15px;
+            height: 460px;
+        }
+        .product-image {
+            border: solid white 5px;
+            object-fit: cover;
+            object-position: center;
+            width: 400px;
+            height: 500px;
+            border-radius: 10px;
+            margin-left: 20px;
+            position: relative;
+            bottom: 80px;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            margin-left: 70px;
+        }
+        .product-details {
+            font-size: 18px;
+            line-height: 1.6;
+            flex: 1;
+
+        }
+        .product-title {
+            font-size: 30px;
+            color: #2b2b2b;
+            font-weight: 500;
+        }
+        .product-price {
+            font-weight: bold;
+            color: white;
+            border-radius: 10px;
+            padding: 5px 10px;
+            width: fit-content;
+            position: relative;
+            left: 370px;
+            font-weight: 500;
+            font-size: 20px;
+            background: linear-gradient(-90deg, rgba(7,100,196,1) 0%, rgba(45,45,158,1) 0%, rgb(106, 17, 207) 100%);
+        }
+        .row-product {
+            color: #5c5c5c;
+            position: relative;
+            left: 50%;
+            transform: translateX(-27%);
+            font-size: 15px;
+            text-align: center;
+            background-color: #fafafa;
+            width: 470px;
+            gap: 20px;
+            display: flex;
+            flex-direction: row;
+            padding-left: 13px;
+            border-radius: 10px;
+            font-weight: 400;
+            box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;            
+        }
+        .row-product svg {
+            fill: #fff;
+            vertical-align: middle;
+            margin-top: -3px;
+            align-content: center;
+        }
+        .product-discount {
+            padding: 3px 7px 3px 12px;
+            border-radius: 10px;
+            color: white;
+            background: linear-gradient(-90deg, rgb(231, 139, 0) 0%, rgba(236,75,0,1) 100%);
+
+        }
+        #product-genre,#product-developer,#product-releaseDate {
+           color: #ffffff;
+           background-color: black;
+           border-radius: 10px;
+           padding: 3px 7px;
+        }
+        #product-description {
+            color: #444444;
+            font-weight: 300;
+        }
+        .buy-button {
+            font-size: 20px;
+            padding: 13px 19px;
+            position: relative;
+            background-color: #20d31a;
+            color: white;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            background-size: 200% 200%;
+        }
+        
+        .buy-button:hover {
+            background-position: right center;
+            background-color: rgb(243, 127, 18);
+            color: #ffffff;
+            -webkit-box-shadow: 0px 0px 24px 0px #fa9600a8;
+            -moz-box-shadow: 0px 0px 24px 0px rgba(250, 208, 0, 0.66);
+            box-shadow: 0px 0px 24px 0px #fa9600a8;
+        }
+        
+        .buy-button svg {
+            vertical-align: middle;
+            margin-left: 20px;
+        }
+        .like-product {
+            margin-left: 10px;
+            padding: 7px;
+            background-color: transparent;
+            border-radius: 10px;
+            border: solid 2px #ff7392;
+        }
+        .like-product svg {
+            fill: #ff7392;
+            vertical-align: middle;
+            transition: all 0.5s;
+        }
+        .like-product:hover svg {
+            animation: tilt 0.3s ease-in-out 1;        }
+        
+        @keyframes tilt {
+            0% { transform: rotate(0) scale(1); }
+            25% { transform: rotate(-10deg) scale(1.1); }
+            50% { transform: rotate(10deg) scale(1.2); }
+            75% { transform: rotate(-10deg) scale(1.1); }
+            100% { transform: rotate(0) scale(1); }
+        }
+        .buy-container {
+            position: relative;
+            margin-top: 70px;
+            margin-right: 250px;
+        }
+        .info {
+            margin: 120px auto 0px auto;
+            z-index: 10;
+            position: relative;
+            background-color: white;
+            width: 100%;
+            height: 600px;
+            text-align: center;
+        }
+        .product-title2 {
+           left: 50%; 
+            margin-top: 10px;
+            position: relative;
+            text-align: center !important;
+            display: flex;
+            flex-direction: row;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 200px auto 0px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            bottom: 100px;
+            border-radius: 30px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .product-halfdesc1 , .product-halfdesc2 {
+            margin: 60px auto;
+            width: 70%;
+            font-weight: 400;
+            font-size: 17px;
+            line-height: 2.3;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .primaryimage {
+            
+            width: 100%;
+            max-width: 1000px;
+            height: auto;
+            margin-bottom: 30px;
+        }
+
+        .gallery {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            margin-left: 100px;
+            margin-right: 100px;
+        }
+
+        .gallery img {
+            object-fit: fill;
+            width: 30%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+
+         .spec {
+            margin-left: 60px;
+            line-height: 2.8;
+            color: #616161;
+            font-weight: 400;
+            text-align: left;
+         }
+         .spec-container h3 {
+            display: flex;
+            justify-content: right;
+            margin-top: 100px;
+            font-weight: 400;
+            color: #131313;
+            vertical-align: middle;
+            width: fit-content;
+            margin-left: 900px;
+            padding-right: 10px;
+            border-right: solid 5px rgb(255, 145, 0);
+         }
+         h3 svg {
+            vertical-align: middle;
+            fill: #131313;
+         }
+         .hr {
+            margin-top: 50px;
+            width: 86%;
+            height: 1px;
+            border: none;
+            background-color: #d8d8d8;
+         }
+         footer {
+            border-radius: 30px 30px 0px 0px;
+            transform: translateX(-50%);
+            position: relative;
+            left: 50%;
+            top: 1400px;
+            justify-content: center;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            margin-top: 30px;
+            width: 80%;
+            background: linear-gradient(90deg, rgba(7,100,196,1) 0%, rgba(45,45,158,1) 0%, rgb(0, 184, 230) 100%);
+            color: rgb(255, 255, 255);
+            padding: 40px 20px;
+            
+        
+        }
+        
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: flex-start;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-logo, .footer-links, .footer-newsletter, .footer-social {
+            flex: 1;
+            min-width: 250px;
+            padding: 10px;
+        }
+        
+        
+        .footer-logo h2 {
+            color: white;
+            font-size: 30px;
+            margin-bottom: 10px;
+        
+        }
+        
+        .footer-links h3, .footer-newsletter h3, .footer-social h3 {
+        
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .footer-links ul {
+            color: #ffffff;
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            color: #0084ff;
+            margin: 8px 0;
+        }
+        
+        .footer-links a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        
+        .footer-newsletter form {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .footer-newsletter input[type="email"] {
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        
+        .footer-newsletter button {
+            color: white;
+            padding: 10px;
+            background-color: #20d31a;
+            border: none;
+            border-radius: 4px;
+            color: ECDFCC;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .footer-newsletter button:hover {
+            background-color: #4ebd2a;
+        }
+        
+        .footer-social .social-icons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .social-icons a {
+            font-size: 24px;
+            color: #ffffff;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            transform: scale(1.1);
+        
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 20px;
+            border-top: 1px solid #ffffff;
+            padding-top: 20px;
+        }
+        
+        .footer-bottom p {
+            margin: 0;
+        
+        }
+        
+    </style>
+</head>
+<body>
+
+    <header class="navbar-container" >
+        <div class="navbar-left">
+            <a class="login" href="../Login/login.html">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M480-492.31q-57.75 0-98.87-41.12Q340-574.56 340-632.31q0-57.75 41.13-98.87 41.12-41.13 98.87-41.13 57.75 0 98.87 41.13Q620-690.06 620-632.31q0 57.75-41.13 98.88-41.12 41.12-98.87 41.12ZM180-187.69v-88.93q0-29.38 15.96-54.42 15.96-25.04 42.66-38.5 59.3-29.07 119.65-43.61 60.35-14.54 121.73-14.54t121.73 14.54q60.35 14.54 119.65 43.61 26.7 13.46 42.66 38.5Q780-306 780-276.62v88.93H180Zm60-60h480v-28.93q0-12.15-7.04-22.5-7.04-10.34-19.11-16.88-51.7-25.46-105.42-38.58Q534.7-367.69 480-367.69q-54.7 0-108.43 13.11-53.72 13.12-105.42 38.58-12.07 6.54-19.11 16.88-7.04 10.35-7.04 22.5v28.93Zm240-304.62q33 0 56.5-23.5t23.5-56.5q0-33-23.5-56.5t-56.5-23.5q-33 0-56.5 23.5t-23.5 56.5q0 33 23.5 56.5t56.5 23.5Zm0-80Zm0 384.62Z"/></svg>
+                ثبت نام / ورود</a>
+                <a class="add-to-cart" href=""><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M286.15-97.69q-29.15 0-49.57-20.43-20.42-20.42-20.42-49.57 0-29.16 20.42-49.58 20.42-20.42 49.57-20.42 29.16 0 49.58 20.42 20.42 20.42 20.42 49.58 0 29.15-20.42 49.57-20.42 20.43-49.58 20.43Zm387.7 0q-29.16 0-49.58-20.43-20.42-20.42-20.42-49.57 0-29.16 20.42-49.58 20.42-20.42 49.58-20.42 29.15 0 49.57 20.42t20.42 49.58q0 29.15-20.42 49.57Q703-97.69 673.85-97.69ZM240.61-730 342-517.69h272.69q3.46 0 6.16-1.73 2.69-1.73 4.61-4.81l107.31-195q2.31-4.23.38-7.5-1.92-3.27-6.54-3.27h-486Zm-28.76-60h555.38q24.54 0 37.11 20.89 12.58 20.88 1.2 42.65L677.38-494.31q-9.84 17.31-26.03 26.96-16.2 9.66-35.5 9.66H324l-46.31 84.61q-3.08 4.62-.19 10 2.88 5.39 8.65 5.39h457.69v60H286.15q-40 0-60.11-34.5-20.12-34.5-1.42-68.89l57.07-102.61L136.16-810H60v-60h113.85l38 80ZM342-517.69h280-280Z"/></svg></a>
+            </div>
+            <div class="navbar-items">
+                <a href="../index.html">خانه</a>
+                <div class="dropdown">
+                    <a href="../products/products.html" class="dropdown-toggle">محصولات</a>
+                    <div class="dropdown-menu">
+                        <a href="../products/products.html">بازی ها</a>
+                        <div class="submenu">
+                            <a href="../products/products.html">تمام بازی ها</a>
+                            <a href="../products/products.html?platform=پلی%20استیشن">پلی استیشن</a>
+                            <a href="../products/products.html?platform=ایکس%20باکس">ایکس باکس</a>
+                        </div>
+                        <a href="../products/products.html?search=Steam">ولت استیم</a>
+                        <a href="../products/products.html?search=Battle">بتل پس</a>
+                        <a href="../products/products.html?search=nitro">نیترو بوست</a>
+                    </div>
+                </div>
+           <a href="../aboutus/aboutus.html">درباره ما
+           </a>
+           <a href="../f&q/quest.html">سوالات
+           </a>
+           <a href="../support/support.html">پشتیبانی
+           </a>
+           <div class="logo">
+            <a href="../index.html">نکــست شاپ
+                <img src="../src/png/logo.png" alt="لگو نکست شاپ">
+            </a>
+        </div>
+    </div>
+    </header>
+    
+    <div class="background">
+        
+    </div>
+<div class="product-container">
+    
+
+    
+    <div class="product-details"> 
+        <h1 id="product-title" class="product-title"></h1>
+    
+        <p id="product-price" class="product-price"></p>
+            <div class="row-product">
+                <p><strong>ژانر:<br></strong> <span id="product-genre"></span></p>
+                <p><strong>توسعه‌دهنده:<br></strong> <span id="product-developer"></span></p>
+                <p><strong>تاریخ انتشار:<br></strong> <span id="product-releaseDate"></span></p>
+                <p><strong>تخفیف:<br></strong> 
+                    <span class="product-discount">
+                    <span id="product-discount"></span><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M240-400q0 52 21 98.5t60 81.5q-1-5-1-9v-9q0-32 12-60t35-51l113-111 113 111q23 23 35 51t12 60v9q0 4-1 9 39-35 60-81.5t21-98.5q0-50-18.5-94.5T648-574q-20 13-42 19.5t-45 6.5q-62 0-107.5-41T401-690q-39 33-69 68.5t-50.5 72Q261-513 250.5-475T240-400Zm240 52-57 56q-11 11-17 25t-6 29q0 32 23.5 55t56.5 23q33 0 56.5-23t23.5-55q0-16-6-29.5T537-292l-57-56Zm0-492v132q0 34 23.5 57t57.5 23q18 0 33.5-7.5T622-658l18-22q74 42 117 117t43 163q0 134-93 227T480-80q-134 0-227-93t-93-227q0-129 86.5-245T480-840Z"/></svg></p>
+                    </span>
+                </div> 
+        <p id="product-description"></p>
+        <div class="buy-container">
+            <a href="#" class="buy-button">خرید محصول<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z"/></svg></a>
+            <a class="like-product"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Zm0-108q96-86 158-147.5t98-107q36-45.5 50-81t14-70.5q0-60-40-100t-100-40q-47 0-87 26.5T518-680h-76q-15-41-55-67.5T300-774q-60 0-100 40t-40 100q0 35 14 70.5t50 81q36 45.5 98 107T480-228Zm0-273Z"/></svg></a>
+        </div>
+
+    </div>
+    <img id="product-image" class="product-image">
+
+</div>
+
+
+<div class="info">
+
+<div class="container">
+    <!-- عنوان اصلی -->
+    <h2><a id="product-title2"></a> درباره‌ی بازی </h2>
+
+    <!-- پاراگراف‌ها -->
+    <p class="product-halfdesc1" id="product-halfdesc1"></p>
+
+    <!-- تصویر بزرگ -->
+    <img id="primaryimage" class="primaryimage">
+    
+
+    <!-- گالری سه تصویر کوچک‌تر -->
+    <div class="gallery">
+        <img id="secondfirstimage" class="secondfirstimage">
+        <img id="secondtwoimage" class="secondtwoimage">
+        <img id="secondthreeimage" class="secondthreeimage">
+    </div>
+    <p class="product-halfdesc2" id="product-halfdesc2"></p>
+
+  <div class="spec-container">
+     <hr class="hr">
+    <h3>سیستم مورد نیاز<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M40-120v-80h880v80H40Zm120-120q-33 0-56.5-23.5T80-320v-440q0-33 23.5-56.5T160-840h640q33 0 56.5 23.5T880-760v440q0 33-23.5 56.5T800-240H160Zm0-80h640v-440H160v440Zm0 0v-440 440Z"/></svg></h3>
+    <div class="spec">
+        <p>OS: Windows 10 – 64-Bit<br>
+            CPU: Intel i3 6300T or equivalent<br>
+            RAM: 8 GB<br>
+            DISC DRIVE: DVD ROM drive required for installation only<br>
+            HARD DRIVE: At least 50 GB of free space<br>
+            VIDEO: NVIDIA GeForce GTX 670 or AMD Radeon R9 270X<br>
+            DirectX: DirectX 12 compatible<br>
+            INPUT: Keyboard and mouse, dual analog controller<br>
+            ONLINE CONNECTION REQUIREMENTS: Internet connection required to install and play.</p>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-logo">
+            <h2>نکست شاپ</h2>
+            <p>یکی از بهترین فروشگاه های انلاین ایران</p>
+        </div>
+        <div class="footer-links">
+            <h3>لینک های سریع </h3>
+            <ul>
+                <li><a href="#">خانه</a></li>
+                <li><a href="#">محصولات</a></li>
+                <li><a href="#">درباره ما</a></li>
+                <li><a href="#">سوالات</a></li>
+                <li><a href="#">پشتیبانی</a></li>
+            </ul>
+        </div>
+        <div class="footer-newsletter">
+            <h3>اخبار ما رو دنبال کن</h3>
+            <form action="#">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit">دنبال کردن</button>
+            </form>
+        </div>
+        <div class="footer-social">
+            <h3>فضای مجازی ما</h3>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2024 NextShop. All rights reserved.</p>
+    </div>
+</footer>
+<script>
+    const products = [
+        {
+            name: "Grand Theft Auto V",
+            img: "../src/png/Card/gtav.jpg",
+            price: "720,000 تومان",
+            discount: "20%",
+            genre: "Action",
+            developer: "Rockstar",
+            releaseDate: "2013",
+            description: "بازی Grand Theft Auto V یکی از معروف‌ترین و محبوب‌ترین بازی‌های اکشن-ماجراجویی است که توسط Rockstar North توسعه یافته و در سال 2013 منتشر شده است.",
+            background: "../src/png/gtabg.jpg",  // پس‌زمینه برای GTA V
+            halfdesc1: "GTA V یکی از محبوب‌ترین بازی‌های جهان باز است که توسط شرکت Rockstar Games توسعه یافته و در سال 2013 منتشر شد. این بازی در شهری خیالی به نام Los Santos جریان دارد که از لس‌آنجلس الهام گرفته شده است. داستان بازی پیرامون سه شخصیت اصلی به نام‌های مایکل، ترور و فرانکلین است که درگیر فعالیت‌های مجرمانه، دزدی‌ها و ماموریت‌های مختلف می‌شوند. GTA V علاوه بر بخش داستانی فوق‌العاده، بخش آنلاین پرطرفداری به نام GTA Online دارد که به بازیکنان امکان تعامل و رقابت با یکدیگر را می‌دهد. گرافیک واقع‌گرایانه، تنوع فعالیت‌ها و دنیای باز گسترده از دلایل اصلی محبوبیت این بازی هستند.",
+            halfdesc2: "GTA V با ترکیب داستان جذاب، آزادی عمل فراوان و گیم‌پلی متنوع، تجربه‌ای منحصربه‌فرد از یک بازی جهان باز ارائه می‌دهد. یکی از ویژگی‌های برجسته بازی، امکان جابجایی بین سه شخصیت اصلی در جریان ماموریت‌ها است که به داستان و گیم‌پلی عمق بیشتری می‌بخشد. همچنین، دنیای پویا و زنده Los Santos پر از جزئیات و فعالیت‌های جانبی است که بازیکنان را ساعت‌ها سرگرم می‌کند.", 
+            primaryimage: "../src/png/Card/gtav1.jpg",
+            secondfirstimage: "../src/png/Card/gtav2.jpg",
+            secondtwoimage: "../src/png/Card/gtav3.jpg",
+            secondthreeimage: "../src/png/Card/gtav4.jpg"
+        },
+        {
+            name: "FC 24",
+            img: "../src/png/Card/fc24.jpg",
+            price: "2,150,000 تومان",
+            discount: "35%",
+            genre: "Sports",
+            developer: "EA Sports",
+            releaseDate: "2023",
+            description: "FC 24 یک بازی ورزشی است که توسط EA Sports توسعه یافته و در سال 2023 منتشر شده است.",
+            background: "../src/png/fc24bg.jpg",  // پس‌زمینه برای FC 24
+            halfdesc1: "FC 24، آخرین نسخه از سری بازی‌های فوتبال معروف الکترونیک آرتز (EA)، با تغییر نام از FIFA به FC، تجربه‌ای کاملاً تازه و به‌روزرسانی شده از فوتبال ارائه می‌دهد. این نسخه با بهره‌گیری از تکنولوژی Hypermotion V، حرکات بازیکنان را بسیار واقع‌گرایانه‌تر و پویا کرده است. در Ultimate Team، برای اولین بار از بازیکنان زن در کنار مردان استفاده می‌شود که تجربه تیم‌سازی را متنوع‌تر می‌کند. همچنین بهبودهای جزئی در هوش مصنوعی بازیکنان و سیستم ضربات آزاد به افزایش چالش و لذت بازی افزوده است. حالت Career Mode نیز با اضافه کردن ویژگی‌های مدیریت پیشرفته‌تر و کنترل بیشتر بر بازیکنان، برای علاقه‌مندان به مدیریت فوتبالی جذاب‌تر شده است. در کنار همه این‌ها، Volta Football همچنان به عنوان بخشی از بازی با جذابیت خاص خود حفظ شده است و تجربه فوتبال خیابانی ارائه می‌دهد.",
+            halfdesc2: "FC 24 با ارائه جزئیات بصری و انیمیشن‌های بهبود یافته، حس واقعی‌تری از ورزش فوتبال را برای بازیکنان به ارمغان می‌آورد. بازی با استفاده از موتور گرافیکی جدید، کیفیت بهتری در طراحی زمین و استادیوم‌ها به نمایش می‌گذارد.",
+            primaryimage: "../src/png/Card/fc241.jpg",
+            secondfirstimage: "../src/png/Card/fc242.jpg",
+            secondtwoimage: "../src/png/Card/fc243.jpg",
+            secondthreeimage: "../src/png/Card/fc244.jpg"
+        },
+        {
+            name: "Elden Ring",
+            img: "../src/png/Card/eldenring.jpg",
+            price: "663,000 تومان", // Adjust the price as needed
+            discount: "64%",           // Adjust the discount as needed
+            genre: "Action",
+            developer: "FromSoftware",
+            releaseDate: "2022",
+            description: "Elden Ring یک بازی اکشن نقش‌آفرینی است که توسط FromSoftware توسعه یافته و در سال 2022 منتشر شده است. این بازی شامل دنیایی وسیع و داستانی پیچیده با گیم‌پلی چالش‌برانگیز است.",
+            background: "../src/png/eldenringbg.jpg",  // پس‌زمینه برای FC 24
+            halfdesc1: "Elden Ring یک بازی اکشن نقش‌آفرینی جهان‌باز است که توسط FromSoftware و به کارگردانی هیدتاکا میازاکی، خالق سری بازی‌های Dark Souls، ساخته شده است. داستان بازی با همکاری جرج آر. آر. مارتین، نویسنده بازی تاج و تخت، خلق شده و به دنیایی تاریک و فانتزی اشاره دارد. در این بازی، بازیکنان به کشف سرزمینی به نام The Lands Between می‌پردازند و به دنبال ترمیم Elden Ring هستند تا تعادل را به این جهان بازگردانند. Elden Ring با ترکیب عناصر جهان‌باز و مبارزات سخت و چالش‌برانگیز، به بازیکنان اجازه می‌دهد که آزادانه دنیای وسیع بازی را کشف کنند. یکی از ویژگی‌های بارز این بازی، طراحی منحصر به فرد باس‌ها و دشمنان است که مبارزه با آن‌ها نیازمند دقت و استراتژی بالایی است. بازی همچنین سیستم پیشرفته‌ای برای شخصی‌سازی شخصیت‌ها دارد، که به بازیکنان امکان انتخاب از میان کلاس‌ها و مهارت‌های مختلف را می‌دهد.",
+            halfdesc2: "Elden Ring به دلیل داستان پیچیده و دنیای وسیع خود، توانسته است توجه طرفداران بازی‌های نقش‌آفرینی و سخت‌پسند را به خود جلب کند. استفاده از طراحی هنری قوی و صداگذاری بی‌نظیر تجربه‌ای ماندگار از ماجراجویی در دنیایی تاریک را به بازیکنان ارائه می‌دهد.",
+            primaryimage: "../src/png/Card/eldenring3.jpg",
+            secondfirstimage: "../src/png/Card/eldenring2.jpg",
+            secondtwoimage: "../src/png/Card/eldenring1.jpg",
+            secondthreeimage: "../src/png/Card/eldenring4.jpg"
+        },
+        {
+            name: "Fortnite Vbucks Gift Card",
+            img: "../src/png/Card/vbucks.jpeg",
+            price: "663,000 تومان",
+            discount: "64%",
+            genre: "Battle Royale",
+            developer: "Epic Games",
+            releaseDate: "2018",
+            description: "V-Bucks واحد پول درون بازی فورتنایت است که برای خرید آیتم‌های مختلف مانند اسکین، ابزارها و رقص‌ها استفاده می‌شود.",
+            background: "../src/png/fortnitebg.jpg",  // پس‌زمینه برای FC 24
+            halfdesc1: "V-Bucks را می‌توان از طریق فروشگاه درون بازی یا بسته‌های ویژه خریداری کرد. این واحد پول در اختیار بازیکنان قرار می‌دهد تا شخصیت‌ها، لباس‌ها، اسلحه‌ها، و آیتم‌های تزئینی دیگری را به دلخواه خود تغییر دهند و بازی را شخصی‌سازی کنند. در برخی از رویدادهای ویژه فورتنایت نیز امکان کسب V-Bucks به عنوان جایزه وجود دارد. استفاده از V-Bucks برای خرید Battle Pass نیز گزینه محبوبی است که به بازیکنان دسترسی به محتواهای بیشتری می‌دهد. با هر Battle Pass، بازیکنان ماموریت‌ها و جوایز ویژه‌ای دریافت می‌کنند که ارزش بیشتری نسبت به هزینه اولیه دارد. بنابراین V-Bucks به‌عنوان ارز دیجیتال فورتنایت نقش کلیدی در تجربه گیمینگ دارد.",
+            halfdesc2: "V-Bucks فقط در فورتنایت قابل استفاده هستند و نمی‌توان آن‌ها را به ارز واقعی تبدیل کرد. خرید V-Bucks از منابع معتبر بسیار مهم است.",
+            primaryimage: "../src/png/Card/fortnite1.jpg",
+            secondfirstimage: "../src/png/Card/fortnite2.jpg",
+            secondtwoimage: "../src/png/Card/fortnite3.jpg",
+            secondthreeimage: "../src/png/Card/fortnite4.jpg"
+              
+        },
+        
+        {
+            name: "Tom Clancy's Rainbow Six Siege",
+            img: "../src/png/Card/rainbow.jpg",
+            price: "394,0000 تومان",
+            discount: "6%",
+            genre: "Tactical Shooter",
+            developer: "Ubisoft",
+            releaseDate: "2015",
+            description: "R6S یک بازی شوتر تاکتیکی است که بازیکنان در آن به تیم‌های پنج نفره تقسیم می‌شوند و باید از مهارت‌های ویژه‌ی اپراتورها برای به‌دست آوردن پیروزی استفاده کنند.",
+            background: "../src/png/rainbowbg.jpg",
+            halfdesc1: "در Rainbow Six Siege، بازیکنان نقش اپراتورهای مختلف را بازی می‌کنند که هر یک دارای توانایی‌ها و ابزارهای خاصی هستند. تیم‌ها به دو دسته مهاجم و مدافع تقسیم می‌شوند و باید از تاکتیک‌های استراتژیک برای انجام مأموریت‌ها استفاده کنند. هر مسابقه شامل مراحل مختلفی است، از جمع‌آوری اطلاعات در مرحله آماده‌سازی تا مبارزه نهایی. بازیکنان باید از محیط به‌خوبی استفاده کنند، دیوارها را تقویت کنند یا به آن‌ها نفوذ کنند، و با هماهنگی با تیم خود به پیروزی برسند. انتخاب درست اپراتور و استفاده هوشمندانه از توانایی‌ها، کلید موفقیت در این بازی است.",
+            halfdesc2: "R6S به طور مداوم با آپدیت‌های جدید و افزودن اپراتورهای تازه پشتیبانی می‌شود. این بازی یکی از محبوب‌ترین شوترهای تاکتیکی در دنیا است.",
+            primaryimage: "../src/png/Card/rainbow4.jpg",
+            secondfirstimage: "../src/png/Card/rainbow3.jpg",
+            secondtwoimage: "../src/png/Card/rainbow2.jpg",
+            secondthreeimage: "../src/png/Card/rainbow1.png"
+            },
+            {
+            name: "Uncharted 4",
+            img: "../src/png/Card/uncharted4.jpg",
+            price: "432,0000 تومان",
+            discount: "0%",
+            genre: "Adventure",
+            developer: "Naughty Dog",
+            releaseDate: "2016",
+            description: "Uncharted 4 یک بازی اکشن-ماجرایی است که داستان ناتان دریک، شکارچی گنج بازنشسته، را در آخرین ماجراجویی‌اش برای پیدا کردن گنج دزدان دریایی روایت می‌کند.",
+            background: "../src/png/unchartedbg.jpg",
+            halfdesc1: "Uncharted 4 بازیکنان را به جهان‌های مختلفی می‌برد، از جزایر گرمسیری تا شهرهای تاریخی. در این بازی، ناتان دریک با معماهای پیچیده و دشمنان خطرناک روبه‌رو می‌شود. استفاده از مخفی‌کاری، تیراندازی و حل معماها از اصلی‌ترین عناصر گیم‌پلی این بازی است. علاوه بر مبارزات هیجان‌انگیز، Uncharted 4 به خاطر داستان عمیق و شخصیت‌های قابل‌باور شهرت دارد. این بازی توسط Naughty Dog توسعه داده شده و گرافیک‌های خیره‌کننده و فیزیک واقع‌گرایانه از ویژگی‌های برجسته آن است.",
+            halfdesc2: "Uncharted 4 با دریافت نقدهای مثبت از سوی منتقدان و طرفداران، به عنوان یکی از بهترین بازی‌های پلی‌استیشن 4 شناخته می‌شود.",
+            primaryimage: "../src/png/Card/uncharted41.jpg",
+            secondfirstimage: "../src/png/Card/uncharted42.jpg",
+            secondtwoimage: "../src/png/Card/uncharted43.jpg",
+            secondthreeimage: "../src/png/Card/uncharted44.jpg"
+            },
+            {
+                name: "God Of War 4",
+                img: "../src/png/Card/gow.jpg",
+                price: "1,150,000 تومان",
+                discount: "0%",
+                genre: "Adventure",
+                developer: "Santa Monica",
+                releaseDate: "2018",
+                description: "God of War 4 داستان کریتوس، جنگجوی افسانه‌ای اسپارتا، و پسرش آترئوس را روایت می‌کند که در دنیای اساطیر نورس درگیر ماجراجویی‌ها و نبردهای خطرناک می‌شوند.",
+                background: "../src/png/gowpng.jpg",
+                halfdesc1: "God of War 4 تفاوت‌های زیادی با نسخه‌های قبلی این سری دارد، از جمله تمرکز بیشتر بر روی داستان‌سرایی عمیق و روابط میان کریتوس و پسرش. این بازی دارای گرافیک خیره‌کننده، مبارزات استراتژیک و محیط‌های گسترده و زیباست. در بازی، کریتوس باید با موجودات اساطیری نورس و خدایان قدرتمند مبارزه کند. او از سلاح‌های جدید مانند تبر لوایتان استفاده می‌کند که قابلیت پرتاب و بازگشت دارد، و بازیکنان باید از مهارت‌ها و استراتژی‌های جدیدی برای پیروزی استفاده کنند.",
+                halfdesc2: "God of War 4 به خاطر داستان عمیق، گیم‌پلی خلاقانه و موسیقی متن تاثیرگذار، یکی از بهترین بازی‌های نسل هشتم محسوب می‌شود.",
+                primaryimage: "../src/png/Card/gow1.jpg",
+                secondfirstimage: "../src/png/Card/gow2.jpg",
+                secondtwoimage: "../src/png/Card/gow3.jpg",
+                secondthreeimage: "../src/png/Card/gow4.jpg"    
+                },
+                {
+                    name: "Fifa 20",
+                    img: "../src/png/Card/fifa20.jpg",
+                    price: "563,000 تومان",
+                    discount: "0%",
+                    genre: "Sports",
+                    developer: "EA Sports",
+                    releaseDate: "2019",
+                    description: "FIFA 20 یکی از محبوب‌ترین بازی‌های ورزشی فوتبال است که توسط EA Sports توسعه داده شده و به بازیکنان امکان می‌دهد تا با تیم‌های مختلف و بازیکنان واقعی به مسابقات هیجان‌انگیز بپردازند.",
+                    background: "../src/png/fifa20bg.jpg",
+                    halfdesc1: "FIFA 20 با معرفی مود جدید Volta Football، حالتی که تمرکز بر فوتبال خیابانی دارد، تحولی جدید در سبک بازی فوتبال ایجاد کرد. این حالت به بازیکنان اجازه می‌دهد در زمین‌های کوچک‌تر و با بازیکنان کمتر مسابقه دهند، که تفاوتی بزرگ با فوتبال سنتی دارد. علاوه بر این، FIFA 20 بهبودهایی در سیستم کنترل توپ، دفاع و حرکات هوشمندانه بازیکنان ایجاد کرده که تجربه بازی را واقع‌گرایانه‌تر می‌کند. بخش Ultimate Team نیز با کارت‌های ویژه و چالش‌های روزانه، همچنان محبوبیت خود را حفظ کرده است.",
+                    halfdesc2: "FIFA 20 به دلیل گرافیک عالی، گیم‌پلی واقع‌گرایانه و اضافه کردن مود Volta، مورد تحسین بسیاری از منتقدان و طرفداران قرار گرفته است.",
+                    primaryimage: "../src/png/Card/fifa201.jpg",
+                    secondfirstimage: "../src/png/Card/fifa202.jpg",
+                    secondtwoimage: "../src/png/Card/fifa203.jpeg",
+                    secondthreeimage: "../src/png/Card/fifa204.jpg"  
+                    },
+                {
+                    name: "Red Dead Redemption 2",
+                    img: "../src/png/Card/rdr2.jpg",
+                    price: "963,000 تومان",
+                    discount: "0%",
+                    genre: "Adventure",
+                    developer: "Rockstar Games",
+                    releaseDate: "2018",
+                    description: "Red Dead Redemption 2 یک بازی اکشن-ماجرایی است که داستان آرتور مورگان، یک قانون‌شکن در حال فرار، را در دنیای وحشی غرب آمریکا روایت می‌کند.",
+                    background: "../src/png/rdr2bg.png",
+                    halfdesc1: "Red Dead Redemption 2 بازیکنان را به دنیای باز و گسترده‌ای می‌برد که جزئیات بسیار زیادی دارد. بازی از مناظر زیبا و طبیعت وحشی گرفته تا شهرهای کوچک و بزرگ با جمعیت‌های متنوع، تجربه‌ای غنی و واقعی از دنیای غرب وحشی ارائه می‌دهد. بازیکنان در نقش آرتور مورگان، عضو گنگ ون‌درلیند، باید با تصمیمات اخلاقی دشوار مواجه شوند و در نبردها، دزدی‌ها و ماموریت‌های مختلف شرکت کنند. گیم‌پلی شامل مکانیک‌های متنوعی از جمله تیراندازی، سوارکاری، شکار و تعامل با محیط و شخصیت‌های دیگر است. روابط میان اعضای گنگ و داستان‌های شخصی هر یک از آن‌ها بخش مهمی از تجربه بازی است.",
+                    halfdesc2: "Red Dead Redemption 2 به خاطر دنیای باز عظیم، داستان‌گویی عمیق و جزئیات فراوان، به یکی از بزرگ‌ترین موفقیت‌های Rockstar Games تبدیل شد.",
+                    primaryimage: "../src/png/Card/rdr21.jpg",
+                    secondfirstimage: "../src/png/Card/rdr22.jpg",
+                    secondtwoimage: "../src/png/Card/rdr23.jpg",
+                    secondthreeimage: "../src/png/Card/rdr24.jpeg"
+                    },
+                {
+                    name: "Ghost Of Tsushima",
+                    img: "../src/png/Card/ghostoft.jpg",
+                    price: "363,000 تومان",
+                    discount: "0%",
+                    genre: "Adventure",
+                    developer: "Sucker Punch",
+                    releaseDate: "2020",
+                    description: "Ghost of Tsushima یک بازی اکشن-ماجرایی است که داستان جین ساکای، آخرین سامورایی باقیمانده در جزیره تسوشیما، را روایت می‌کند که باید در برابر حمله مغول‌ها از سرزمین خود دفاع کند.",
+                    background: "../src/png/ghostoftbg.jpg",
+                    halfdesc1: "Ghost of Tsushima بازیکنان را به ژاپن قرن سیزدهم می‌برد، جایی که جین ساکای در نبردی نابرابر با ارتش مغول‌ها قرار دارد. بازیکنان در این بازی باید میان مبارزات سنتی سامورایی و سبک مخفی‌کاری انتخاب کنند و برای آزادسازی سرزمین تسوشیما از مغول‌ها تلاش کنند. گیم‌پلی بازی شامل مبارزات سریع و دقیق، استفاده از سلاح‌های متنوع، و همچنین کشف دنیای باز بزرگ و زیبا است. دنیای بازی از کوه‌ها، جنگل‌ها، و معابد تشکیل شده و بازیکنان باید از مهارت‌های جنگی و تاکتیکی برای پیروزی استفاده کنند.",
+                    halfdesc2: "Ghost of Tsushima به دلیل گرافیک خیره‌کننده، داستان‌گویی عمیق و مبارزات واقع‌گرایانه، به یکی از برترین بازی‌های پلی‌استیشن 4 تبدیل شد.",
+                    primaryimage: "../src/png/Card/ghostoft1.jpg",
+                    secondfirstimage: "../src/png/Card/ghostoft2.jpg",
+                    secondtwoimage: "../src/png/Card/ghostoft3.jpg",
+                    secondthreeimage: "../src/png/Card/ghostoft4.jpg"
+                    },
+                {
+                    name: "Need For Speed Heat",
+                    img: "../src/png/Card/nfsheat.jpg",
+                    price: "1,663,000 تومان",
+                    discount: "0%",
+                    genre: "Racing",
+                    developer: "Ghost Games",
+                    releaseDate: "2019",
+                    description: "Need for Speed Heat یک بازی مسابقه‌ای است که بازیکنان را به شهر Palm City می‌برد، جایی که در روز مسابقات قانونی و در شب رقابت‌های غیرقانونی جریان دارد.",
+                    background: "../src/png/nfsheatbg.jpg",
+                    halfdesc1: "Need for Speed Heat به بازیکنان اجازه می‌دهد در شهر آزاد Palm City مسابقه دهند، در حالی که سیستم شب و روز نقش مهمی در گیم‌پلی دارد. در طول روز، بازیکنان می‌توانند در مسابقات قانونی شرکت کنند و پول برای ارتقای خودروهایشان کسب کنند. اما با فرا رسیدن شب، رقابت‌های غیرقانونی شروع می‌شود و خطر بیشتری از طرف پلیس‌ها وجود دارد. بخش سفارشی‌سازی خودروها از نقاط برجسته بازی است و بازیکنان می‌توانند ماشین‌های خود را با قطعات مختلف و ظاهرهای جذاب تنظیم کنند.",
+                    halfdesc2: "Need for Speed Heat به دلیل تنوع مسابقات، گرافیک زیبا و سفارشی‌سازی گسترده خودروها مورد تحسین طرفداران ژانر مسابقه‌ای قرار گرفته است.",
+                    primaryimage: "../src/png/Card/nfsheat1.jpg",
+                    secondfirstimage: "../src/png/Card/nfsheat2.png",
+                    secondtwoimage: "../src/png/Card/nfsheat3.jpg",
+                    secondthreeimage: "../src/png/Card/nfsheat4.jpg"
+                    },
+                {
+                    name: "Call Of Duty Ghosts",
+                    img: "../src/png/Card/codghost.jpg",
+                    price: "663,000 تومان",
+                    discount: "0%",
+                    genre: "FPS",
+                    developer: "Infinity Ward",
+                    releaseDate: "2013",
+                    description: "Call of Duty: Ghosts یک باز است که دنیایی پسا-آخرالزمانی  دارد. بازیکنان نقش سربازان گروه Ghosts را بر عهده دارند که باید از بقایای ایالات متحده در برابر تهدیدات جدید محافظت کنند.",
+                    background: "../src/png/codghostbg.jpg",
+                    halfdesc1: "Call of Duty: Ghosts دارای کمپین تک‌نفره‌ای است که بازیکنان را در دنیای پس از حمله ویرانگر به ایالات متحده قرار می‌دهد. در این بازی، گروهی به نام Ghosts که سربازان نخبه‌ای هستند، برای مقابله با دشمنان جدید و خطرناک تلاش می‌کنند. بازی دارای گیم‌پلی تاکتیکی و سریع است و محیط‌های گسترده‌ای برای مبارزات ارائه می‌دهد. همچنین در بخش چندنفره، بازیکنان می‌توانند در مودهای مختلف از جمله مود محبوب Extinction شرکت کنند که در آن باید با موج‌های دشمنان فرازمینی مقابله کنند.",
+                    halfdesc2: "Call of Duty: Ghosts به خاطر داستان دراماتیک، بخش چندنفره گسترده و گرافیک پیشرفته‌اش در زمان خود شناخته شده است.",
+                    primaryimage: "../src/png/Card/codghost1.jpg",
+                    secondfirstimage: "../src/png/Card/codghost2.jpg",
+                    secondtwoimage: "../src/png/Card/codghost3.jpg",
+                    secondthreeimage: "../src/png/Card/codghost4.jpg"
+                    }, 
+                {
+                    name: "Call Of Duty Black Ops 4",
+                    img: "../src/png/Card/codbo4.jpg",
+                    price: "963,000 تومان",
+                    discount: "0%",
+                    genre: "FPS",
+                    developer: "Treyarch",
+                    releaseDate: "2018",
+                    description: "Call of Duty: Black Ops 4 یک بازی شوتر اول شخص است که بیشتر  چندنفره تمرکز دارد و فاقد  کمپین است. این بازی شامل مودهای مختلفی از جمله بخش Blackout است که تجربه‌ای بتل رویال ارائه می‌دهد.",
+                    background: "../src/png/codbo4bg.jpg",
+                    halfdesc1: "Call of Duty: Black Ops 4 اولین نسخه از سری است که بدون کمپین تک‌نفره منتشر شده است و تمرکز آن بیشتر روی بخش چندنفره و مودهای مختلف است. Blackout، مود بتل رویال بازی، به بازیکنان اجازه می‌دهد تا در نقشه‌های بزرگ با یکدیگر مبارزه کنند و تا آخرین نفر زنده بمانند. همچنین بازی دارای مودهای محبوب زامبی است که به تیم‌های بازیکنان اجازه می‌دهد با موج‌های بی‌پایان زامبی‌ها مبارزه کنند. مود چندنفره سنتی نیز شامل سیستم جدیدی برای سلامتی، تجهیزات و تخصص‌ها است که باعث می‌شود استراتژی‌های جدیدی در بازی شکل بگیرد.",
+                    halfdesc2: "Call of Duty: Black Ops 4 با بخش Blackout و زامبی‌های قوی، و همچنین گیم‌پلی سریع و رقابتی چندنفره، مورد استقبال طرفداران سری قرار گرفت.",
+                    primaryimage: "../src/png/Card/codbo41.jpg",
+                    secondfirstimage: "../src/png/Card/codbo42.jpg",
+                    secondtwoimage: "../src/png/Card/codbo43.jpg",
+                    secondthreeimage: "../src/png/Card/codbo44.jpg"
+                    },      
+                    
+                {
+                    name: "Call Of Duty Black Ops 3",
+                    img: "../src/png/Card/codbo3.jpg",
+                    price: "223,000 تومان",
+                    discount: "0%",
+                    genre: "FPS",
+                    developer: "Treyarch",
+                    releaseDate: "2015",
+                    description: "Call of Duty: Black Ops 3 یک بازی شوتر اول شخص است که بیشتر  چندنفره تمرکز دارد و فاقد  کمپین است. این بازی شامل مودهای مختلفی از جمله بخش Blackout است که تجربه‌ای بتل رویال ارائه می‌دهد.",
+                    background: "../src/png/codbo3bg.jpg",
+                    halfdesc1: "Call of Duty: Black Ops 3 اولین نسخه از سری است که بدون کمپین تک‌نفره منتشر شده است و تمرکز آن بیشتر روی بخش چندنفره و مودهای مختلف است. Blackout، مود بتل رویال بازی، به بازیکنان اجازه می‌دهد تا در نقشه‌های بزرگ با یکدیگر مبارزه کنند و تا آخرین نفر زنده بمانند. همچنین بازی دارای مودهای محبوب زامبی است که به تیم‌های بازیکنان اجازه می‌دهد با موج‌های بی‌پایان زامبی‌ها مبارزه کنند. مود چندنفره سنتی نیز شامل سیستم جدیدی برای سلامتی، تجهیزات و تخصص‌ها است که باعث می‌شود استراتژی‌های جدیدی در بازی شکل بگیرد.",
+                    halfdesc2: "Call of Duty: Black Ops 3 با بخش Blackout و زامبی‌های قوی، و همچنین گیم‌پلی سریع و رقابتی چندنفره، مورد استقبال طرفداران سری قرار گرفت.",
+                    primaryimage: "../src/png/Card/codbo31.jpg",
+                    secondfirstimage: "../src/png/Card/codbo32.jpg",
+                    secondtwoimage: "../src/png/Card/codbo33.jpg",
+                    secondthreeimage: "../src/png/Card/codbo34.jpg"
+                    },   
+                {
+                    name: "Forza Horizon 3",
+                    img: "../src/png/Card/fh3.jpg",
+                    price: "963,000 تومان",
+                    discount: "0%",
+                    genre: "Racing",
+                    developer: "Playground Games",
+                    releaseDate: "2016",
+                    description: "Forza Horizon 3 یک بازی مسابقه‌ای است که در استرالیا برگزار می‌شود و به بازیکنان امکان می‌دهد تا در محیطی باز و بزرگ با خودروهای مختلف به مسابقه بپردازند.",
+                    background: "../src/png/fh3bg.jpg",
+                    halfdesc1: "Forza Horizon 3 بازیکنان را به مناظر زیبای استرالیا می‌برد و به آن‌ها اجازه می‌دهد تا در محیط‌های باز از جمله سواحل، جنگل‌ها و بیابان‌ها با ماشین‌های اسپرت، کلاسیک و آفرود مسابقه دهند. بازیکنان در این بازی مدیر جشنواره Horizon هستند و می‌توانند رویدادها و مسابقات جدیدی ایجاد کنند. بخش سفارشی‌سازی خودروها بسیار گسترده است و امکان تغییرات متنوع در ظاهر و عملکرد خودروها وجود دارد. همچنین، بازیکنان می‌توانند با دوستان خود به صورت آنلاین در مسابقات شرکت کنند و دنیای Horizon را به اشتراک بگذارند.",
+                    halfdesc2: "Forza Horizon 3 به دلیل گرافیک خیره‌کننده، دنیای باز گسترده و تنوع بالای خودروها و مسابقات، به یکی از بهترین بازی‌های مسابقه‌ای تبدیل شده است.",
+                    primaryimage: "../src/png/Card/fh31.jpg",
+                    secondfirstimage: "../src/png/Card/fh32.jpg",
+                    secondtwoimage: "../src/png/Card/fh33.jpg",
+                    secondthreeimage: "../src/png/Card/fh34.jpg"
+                    }, 
+                {
+                    name: "Minecraft",
+                    img: "../src/png/Card/minecraft.jpg",
+                    price: "1,150,000 تومان",
+                    discount: "0%",
+                    genre: "Sandbox",
+                    developer: "Mojang Studios",
+                    releaseDate: "2011",
+                    description: "Minecraft یک بازی جهان‌باز است که بازیکنان در آن می‌توانند به صورت آزادانه به ساخت و ساز، استخراج منابع و مبارزه با موجودات مختلف بپردازند.",
+                    background: "../src/png/minecraftbg.jpg",
+                    halfdesc1: "Minecraft به بازیکنان امکان می‌دهد تا در دنیایی بلوکی به اکتشاف بپردازند و با استفاده از منابعی که در محیط پیدا می‌کنند، ابزارها، سازه‌ها و تجهیزات مختلف بسازند. این بازی دارای دو حالت اصلی است: Creative و Survival. در حالت Creative، بازیکنان منابع نامحدود دارند و می‌توانند به صورت آزادانه سازه‌های پیچیده و خلاقانه ایجاد کنند. در حالت Survival، بازیکنان باید منابع خود را مدیریت کنند، از خود در برابر موجودات خطرناک محافظت کرده و برای زنده ماندن تلاش کنند. Minecraft به دلیل گیم‌پلی آزاد و خلاقانه‌اش به عنوان یکی از پرفروش‌ترین و محبوب‌ترین بازی‌های تاریخ شناخته می‌شود.",
+                    halfdesc2: "Minecraft به بازیکنان این امکان را می‌دهد تا به تنهایی یا با دوستان خود در دنیای‌های چندنفره بازی کنند و سازه‌های شگفت‌انگیزی بسازند. این بازی با وجود ظاهر ساده‌اش، تجربه‌ای عمیق و بی‌نهایت خلاقانه ارائه می‌دهد.",
+                    primaryimage: "../src/png/Card/minecraft1.jpg",
+                    secondfirstimage: "../src/png/Card/minecraft2.jpg",
+                    secondtwoimage: "../src/png/Card/minecraft3.jpg",
+                    secondthreeimage: "../src/png/Card/minecraft4.jpg"
+                    },  
+                    {
+                        name: "Cyberpunk 2077",
+                        img: "../src/png/Card/cyberpunk.jpg",
+                        price: "563,000 تومان",
+                        discount: "0%",
+                        genre: "RPG",
+                        developer: "CD Projekt Red",
+                        releaseDate: "2020",
+                        description: "Cyberpunk 2077 یک بازی نقش‌آفرینی است که در دنیایی پسا-آینده‌نگرانه جریان دارد و بازیکنان در نقش V، یک مزدور با قابلیت‌های سایبری، در شهر Night City به ماجراجویی می‌پردازند.",
+                        background: "../src/png/cyberpunkbg.jpg",
+                        halfdesc1: "در Cyberpunk 2077، بازیکنان وارد دنیای پیچیده‌ای می‌شوند که فناوری‌های پیشرفته و سایبرنتیک با جنایت، سیاست و فساد در هم تنیده‌اند. بازیکنان در نقش V می‌توانند شخصیت خود را با استفاده از تقویت‌کننده‌های سایبری، سلاح‌های پیشرفته و مهارت‌های جدید سفارشی‌سازی کنند. گیم‌پلی بازی شامل ترکیبی از تیراندازی اول‌شخص، مخفی‌کاری، تعامل با شخصیت‌های مختلف و انتخاب‌های داستانی است که تأثیر مستقیمی بر داستان و پایان بازی دارد. شهر Night City با طراحی جهان باز گسترده و جزئیات بسیار زیاد، تجربه‌ای غوطه‌ورکننده از یک دنیای پسا-آینده‌ای ارائه می‌دهد.",
+                        halfdesc2: "Cyberpunk 2077 به دلیل داستان‌گویی عمیق، جهان بزرگ و متنوع، و آزادی عمل بازیکنان در انتخاب‌های داستانی و گیم‌پلی، یکی از برجسته‌ترین بازی‌های نقش‌آفرینی نسل هشتم محسوب می‌شود.",
+                        primaryimage: "../src/png/Card/cyberpunk1.jpg",
+                        secondfirstimage: "../src/png/Card/cyberpunk2.jpg",
+                        secondtwoimage: "../src/png/Card/cyberpunk3.jpg",
+                        secondthreeimage: "../src/png/Card/cyberpunk4.jpg"
+                        },   
+                    {
+                        name: "Forza Horizon 4",
+                        img: "../src/png/Card/fh4.jpg",
+                        price: "963,000 تومان",
+                        discount: "0%",
+                        genre: "Racing",
+                        developer: "Playground Games",
+                        releaseDate: "2018",
+                        description: "Forza Horizon 4 یک بازی مسابقه‌ای است که در محیطی باز در بریتانیا جریان دارد و به بازیکنان اجازه می‌دهد تا با خودروهای مختلف و در فصل‌های متغیر مسابقه دهند.",
+                        background: "../src/png/fh4bg.jpg",
+                        halfdesc1: "Forza Horizon 4 یکی از برجسته‌ترین بازی‌های مسابقه‌ای است که در محیطی باز و جهان‌گسترده از بریتانیا برگزار می‌شود. این بازی دارای سیستم تغییر فصول است که بر شرایط جاده‌ها و نحوه مسابقات تأثیر می‌گذارد. بازیکنان می‌توانند از میان انواع مختلفی از خودروها انتخاب کنند و آن‌ها را به دلخواه سفارشی‌سازی کنند. دنیای بازی شامل جاده‌های شهری، جنگل‌ها، کوه‌ها، و حتی مناطق برفی است. علاوه بر مسابقات تک‌نفره، بازیکنان می‌توانند با دوستان خود در مودهای چندنفره آنلاین نیز رقابت کنند و در چالش‌های روزانه و هفتگی شرکت کنند.",
+                        halfdesc2: "Forza Horizon 4 به دلیل گرافیک‌های چشم‌نواز، گیم‌پلی روان و استفاده خلاقانه از سیستم تغییر فصول، به یکی از موفق‌ترین و پرطرفدارترین بازی‌های مسابقه‌ای تبدیل شده است.",
+                        primaryimage: "../src/png/Card/fh41.jpg",
+                        secondfirstimage: "../src/png/Card/fh42.jpg",
+                        secondtwoimage: "../src/png/Card/fh43.jpg",
+                        secondthreeimage: "../src/png/Card/fh44.jpg"
+                        },   
+                    {
+                        name: "Call Of Duty Modern Warfare 3",
+                        img: "../src/png/Card/codmw3.jpg",
+                        price: "363,000 تومان",
+                        discount: "0%",
+                        genre: "FPS",
+                        developer: "Infinity Ward",
+                        releaseDate: "2011",
+                        description: "Call of Duty: Modern Warfare 3 یک بازی شوتر اول شخص است که داستان ادامه نبردهای جهانی و حملات تروریستی را روایت می‌کند و بازیکنان را در ماموریت‌های پرتنش و هیجان‌انگیز قرار می‌دهد.",
+                        background: "../src/png/codmw3bg.jpg",
+                        halfdesc1: "Modern Warfare 3 سومین نسخه از سری محبوب Modern Warfare است که داستان جنگ‌های جهانی و عملیات‌های نظامی مخفیانه را ادامه می‌دهد. بازیکنان در این بازی نقش چندین شخصیت مختلف را بر عهده می‌گیرند و در سراسر جهان، از نیویورک تا لندن و برلین، به مبارزه می‌پردازند. گیم‌پلی بازی سریع و تاکتیکی است و از سلاح‌های مدرن و متنوعی استفاده می‌شود. بخش چندنفره بازی نیز یکی از بهترین و محبوب‌ترین بخش‌ها در تاریخ Call of Duty است و مودهای مختلفی همچون Team Deathmatch و Domination را ارائه می‌دهد.",
+                        halfdesc2: "Call of Duty: Modern Warfare 3 به خاطر گرافیک‌های واقع‌گرایانه، صحنه‌های سینمایی هیجان‌انگیز و بخش چندنفره گسترده‌اش، به یکی از محبوب‌ترین نسخه‌های این سری تبدیل شد.",
+                        primaryimage: "../src/png/Card/codmw31.jpg",
+                        secondfirstimage: "../src/png/Card/codmw32.jpg",
+                        secondtwoimage: "../src/png/Card/codmw33.jpg",
+                        secondthreeimage: "../src/png/Card/codmw34.jpg"
+                        }, 
+                    {
+                        name: "Far Cry 5",
+                        img: "../src/png/Card/farcry5.jpg",
+                        price: "1,663,000 تومان",
+                        discount: "0%",
+                        genre: "FPS",
+                        developer: "Ubisoft",
+                        releaseDate: "2018",
+                        description: "Far Cry 5 یک بازی شوتر اول شخص است که در منطقه خیالی Hope County، مونتانا جریان دارد. بازیکنان باید در برابر فرقه‌ای مذهبی و خطرناک به نام 'Project at Eden's Gate' مبارزه کنند.",
+                        background: "../src/png/farcry5bg.jpg",
+                        halfdesc1: "در Far Cry 5، بازیکنان نقش یک معاون کلانتر تازه‌کار را بر عهده می‌گیرند که باید در برابر فرقه‌ی 'Project at Eden's Gate' به رهبری جوزف سید بایستد. بازی دارای دنیای باز و بزرگی است که بازیکنان می‌توانند به صورت آزادانه در آن گشت و گذار کنند، مأموریت‌های مختلف را انجام دهند و با دوستان خود به صورت کو-آپ یا به تنهایی بازی کنند. مبارزات بازی با استفاده از سلاح‌های متنوع و وسایل نقلیه مانند ماشین‌ها، هلیکوپترها و حتی هواپیماها امکان‌پذیر است.",
+                        halfdesc2: "Far Cry 5 به دلیل داستان جذاب، دنیای باز گسترده و آزادی عمل در انتخاب مسیرهای مختلف بازی، تحسین زیادی از منتقدان و بازیکنان دریافت کرده است. همچنین بخش‌های چندنفره و ابزارهای ساخت نقشه نیز از ویژگی‌های برجسته آن هستند.",
+                        primaryimage: "../src/png/Card/farcry51.jpg",
+                        secondfirstimage: "../src/png/Card/farcry52.jpg",
+                        secondtwoimage: "../src/png/Card/farcry53.jpg",
+                        secondthreeimage: "../src/png/Card/farcry54.jpg"
+                        }, 
+                    {
+                        name: "Far Cry 6",
+                        img: "../src/png/Card/farcry6.jpg",
+                        price: "663,000 تومان",
+                        discount: "0%",
+                        genre: "FPS",
+                        developer: "Ubisoft",
+                        releaseDate: "2019",
+                        description: "Far Cry 6 یک بازی شوتر اول شخص است که در منطقه خیالی Hope County، مونتانا جریان دارد. بازیکنان باید در برابر فرقه‌ای مذهبی و خطرناک به نام 'Project at Eden's Gate' مبارزه کنند.",
+                        background: "../src/png/farcry5bg.jpg",
+                        halfdesc1: "در Far Cry 6، بازیکنان نقش یک معاون کلانتر تازه‌کار را بر عهده می‌گیرند که باید در برابر فرقه‌ی 'Project at Eden's Gate' به رهبری جوزف سید بایستد. بازی دارای دنیای باز و بزرگی است که بازیکنان می‌توانند به صورت آزادانه در آن گشت و گذار کنند، مأموریت‌های مختلف را انجام دهند و با دوستان خود به صورت کو-آپ یا به تنهایی بازی کنند. مبارزات بازی با استفاده از سلاح‌های متنوع و وسایل نقلیه مانند ماشین‌ها، هلیکوپترها و حتی هواپیماها امکان‌پذیر است.",
+                        halfdesc2: "Far Cry 6 به دلیل داستان جذاب، دنیای باز گسترده و آزادی عمل در انتخاب مسیرهای مختلف بازی، تحسین زیادی از منتقدان و بازیکنان دریافت کرده است. همچنین بخش‌های چندنفره و ابزارهای ساخت نقشه نیز از ویژگی‌های برجسته آن هستند.",
+                        primaryimage: "../src/png/Card/farcry61.jpg",
+                        secondfirstimage: "../src/png/Card/farcry62.jpg",
+                        secondtwoimage: "../src/png/Card/farcry63.jpg",
+                        secondthreeimage: "../src/png/Card/farcry64.jpg"
+                        }, 
+                    {
+                        name: "Watch Dogs",
+                        img: "../src/png/Card/watchdogs.jpg",
+                        price: "963,000 تومان",
+                        discount: "0%",
+                        genre: "Action-Adventure",
+                        developer: "Ubisoft",
+                        releaseDate: "2014",
+                        description: "Watch Dogs یک بازی اکشن-ماجرایی است که در آن بازیکنان نقش هکری به نام آیدن پیرس را بازی می‌کنند که از توانایی‌های هک کردن خود برای کنترل شهر شیکاگو و انتقام از کسانی، استفاده می‌کند.",
+                        background: "../src/png/watchdogsbg.jpg",
+                        halfdesc1: "در Watch Dogs، بازیکنان می‌توانند با استفاده از سیستم‌های مختلف شهر مانند دوربین‌های امنیتی، چراغ‌های راهنمایی، و شبکه‌های الکترونیکی، کنترل شهر شیکاگو را به دست بگیرند و ماموریت‌های مختلف را انجام دهند. آیدن پیرس با استفاده از گوشی هوشمند خود می‌تواند به هر دستگاه متصل به شبکه دسترسی پیدا کند و از آن‌ها برای حل مسائل، دزدیدن اطلاعات، و یا به دام انداختن دشمنان استفاده کند. گیم‌پلی بازی شامل مخفی‌کاری، تیراندازی، و هک کردن سیستم‌های مختلف برای پیشرفت در داستان است.",
+                        halfdesc2: "Watch Dogs به دلیل ترکیب منحصر به فردی از هک کردن و مبارزات اکشن، دنیای باز گسترده و داستان‌گویی جذاب مورد تحسین قرار گرفته است. بازیکنان می‌توانند در دنیای باز بازی به گشت و گذار بپردازند و با ماموریت‌های جانبی و فعالیت‌های مختلف خود را سرگرم کنند.",
+                        primaryimage: "../src/png/Card/watchdogs1.jpg",
+                        secondfirstimage: "../src/png/Card/watchdogs12.jpg",
+                        secondtwoimage: "../src/png/Card/watchdogs3.jpg",
+                        secondthreeimage: "../src/png/Card/watchdogs4.jpg"
+                        }, 
+                    {
+                        name: "Watch Dogs 2",
+                        img: "../src/png/Card/watchdogs2.jpg",
+                        price: "223,000 تومان",
+                        discount: "0%",
+                        genre: "Action-Adventure",
+                        developer: "Ubisoft",
+                        releaseDate: "2016",
+                        description: "Watch Dogs 2 یک بازی اکشن-ماجرایی است که بازیکنان را به شهر سانفرانسیسکو می‌برد، جایی که نقش ، یک هکر جوان و بااستعداد، DedSec برای مبارزه با سیستم‌های نظارتی فاسد همکاری می‌کند.",
+                        background: "../src/png/watchdogs2bg.jpg",
+                        halfdesc1: "در Watch Dogs 2، بازیکنان می‌توانند از مهارت‌های هک کردن مارکوس برای کنترل زیرساخت‌های دیجیتالی شهر استفاده کنند. این بازی با گیم‌پلی باز و آزادی عمل بیشتر نسبت به نسخه اول، به بازیکنان اجازه می‌دهد تا وسایل نقلیه، پهپادها، روبات‌ها و دوربین‌های امنیتی را هک کنند. بازیکنان می‌توانند از طریق محیط شهری به گشت و گذار بپردازند، ماموریت‌های اصلی و جانبی را انجام دهند، و برای افشای فساد و سوءاستفاده‌های قدرت تلاش کنند. همکاری با گروه DedSec و استفاده از ابزارهای پیشرفته، بخش بزرگی از گیم‌پلی این بازی است.",
+                        halfdesc2: "Watch Dogs 2 با بهبود سیستم‌های هک کردن، آزادی بیشتر در بازی و یک دنیای باز زنده‌تر نسبت به نسخه قبلی، توجه طرفداران بسیاری را به خود جلب کرد. گرافیک زیبا، شخصیت‌های جذاب و ماموریت‌های متنوع از ویژگی‌های برجسته این بازی هستند.",
+                        primaryimage: "../src/png/Card/watchdogs21.jpg",
+                        secondfirstimage: "../src/png/Card/watchdogs22.jpg",
+                        secondtwoimage: "../src/png/Card/watchdogs23.jpg",
+                        secondthreeimage: "../src/png/Card/watchdogs24.jpg"
+                        }, 
+                    {
+                        name: "Xbox Game Pass",
+                        img: "../src/png/Card/xboxgift.jpg",
+                        price: "432,000 تومان",
+                        discount: "0%",
+                        genre: "Service",
+                        developer: "Microsoft",
+                        releaseDate: "2017",
+                        description: "Xbox Game Pass یک سرویس اشتراکی است که به بازیکنان اجازه می‌دهد به کتابخانه‌ای گسترده از بازی‌های کنسول Xbox، PC و دستگاه‌های موبایل دسترسی داشته باشند.",
+                        background: "../src/png/xboxgiftbg.jpg",
+                        halfdesc1: "Xbox Game Pass به کاربران این امکان را می‌دهد که با پرداخت یک هزینه ماهانه، به صدها بازی مختلف از ژانرهای گوناگون دسترسی پیدا کنند. این سرویس شامل بازی‌های جدید و انحصاری Xbox و همچنین عناوین محبوب از استودیوهای مستقل است. علاوه بر این، کاربران می‌توانند از بازی‌های رایگان در روز عرضه لذت ببرند، مانند نسخه‌های جدید از استودیوهای Microsoft. این سرویس بر روی کنسول‌های Xbox و رایانه‌های شخصی قابل دسترسی است و بسیاری از بازی‌ها از طریق Cloud Gaming نیز قابل بازی هستند.",
+                        halfdesc2: "Xbox Game Pass به دلیل ارائه تنوع گسترده‌ای از بازی‌ها، دسترسی به بازی‌های انحصاری و قابلیت اشتراک‌گذاری بازی‌ها در چندین پلتفرم، یکی از محبوب‌ترین سرویس‌های اشتراکی برای گیمرها به شمار می‌رود.",
+                        primaryimage: "../src/png/Card/xboxgift1.jpg",
+                        secondfirstimage: "../src/png/Card/xboxgift2.jpg",
+                        secondtwoimage: "../src/png/Card/xboxgift3.jpg",
+                        secondthreeimage: "../src/png/Card/xboxgift4.jpg"
+                        }, 
+                    {
+                        name: "Steam Wallet Ukraine",
+                        img: "../src/png/Card/steamwalletukraine.jpg",
+                        price: "1,150,000 تومان",
+                        discount: "0%",
+                        genre: "Service",
+                        developer: "Valve Corporation",
+                        releaseDate: "2003",
+                        description: "Steam Wallet Ukraine یک کارت هدیه دیجیتالی است که به کاربران امکان می‌دهد تا حساب استیم خود را با اعتبار شارژ کرده و بازی‌ها، محتواهای دیجیتال، و  فروشگاه استیم خریداری کنند.",
+                        background: "../src/png/steamwalletukrainebg.jpg",
+                        halfdesc1: "Steam Wallet Ukraine برای کاربران اوکراین طراحی شده است و به آن‌ها اجازه می‌دهد که با اعتبار محلی خود حساب استیم‌شان را شارژ کنند. این کارت‌های هدیه در مبالغ مختلف موجود هستند و می‌توان از آن‌ها برای خرید بازی‌ها، محتوای دانلودی (DLC)، نرم‌افزارها، و آیتم‌های درون بازی استفاده کرد. خرید و شارژ اعتبار از طریق Steam Wallet به کاربران این امکان را می‌دهد که بدون نیاز به کارت‌های بانکی بین‌المللی، از فروشگاه Steam استفاده کنند.",
+                        halfdesc2: "Steam Wallet Ukraine راهی ساده و ایمن برای دسترسی به محصولات استیم برای گیمرهای اوکراین است. این سرویس به‌خصوص برای کسانی که به دنبال هدیه دادن اعتبار استیم هستند یا تمایل دارند از پول محلی خود استفاده کنند، گزینه مناسبی به شمار می‌رود.",
+                        primaryimage: "../src/png/Card/steamwalletukraine1.jpg",
+                        secondfirstimage: "../src/png/Card/steamwalletukraine2.jpg",
+                        secondtwoimage: "../src/png/Card/steamwalletukraine3.jpg",
+                        secondthreeimage: "../src/png/Card/steamwalletukraine4.jpg"
+                        }, 
+                    {
+                        name: "Google Play Gift Card",
+                        img: "../src/png/Card/googleplay.jpg",
+                        price: "563,000 تومان",
+                        discount: "0%",
+                        genre: "Service",
+                        developer: "Google",
+                        releaseDate: "2011",
+                        description: "Google Play Gift Card یک کارت هدیه دیجیتالی است که به کاربران امکان می‌دهد تا از اعتبار آن برای خرید اپلیکیشن‌ها، بازی‌ها، فیلم‌ها، کتاب‌ها و محتوای دیگر از فروشگاه Google Play استفاده کنند.",
+                        background: "../src/png/googleplaybg.jpg",
+                        halfdesc1: "Google Play Gift Card به کاربران این امکان را می‌دهد تا به‌راحتی اعتبار خود را در حساب Google Play افزایش دهند و از آن برای خرید محتوای دیجیتالی در گوشی‌های اندروید و دستگاه‌های مرتبط استفاده کنند. این کارت‌های هدیه در مقادیر مختلف موجود هستند و می‌توان از آن‌ها برای خرید بازی‌ها، اپلیکیشن‌ها، موسیقی، فیلم و کتاب‌های الکترونیکی استفاده کرد. کارت‌های هدیه Google Play در فروشگاه‌های مختلف آنلاین و فیزیکی در دسترس هستند.",
+                        halfdesc2: "Google Play Gift Card راهی ساده و سریع برای خرید محتوای دیجیتالی در فروشگاه Google Play فراهم می‌کند و به‌خصوص برای کسانی که دوست دارند بدون نیاز به کارت اعتباری، بازی‌ها و اپلیکیشن‌های دلخواه خود را خریداری کنند، مناسب است.",
+                        primaryimage: "../src/png/Card/googleplay1.jpg",
+                        secondfirstimage: "../src/png/Card/googleplay2.jpg",
+                        secondtwoimage: "../src/png/Card/googleplay3.jpg",
+                        secondthreeimage: "../src/png/Card/googleplay4.jpg"
+                        },   
+                    {
+                        name: "Ea Play Gift Card",
+                        img: "../src/png/Card/eaplay.jpg",
+                        price: "963,000 تومان",
+                        discount: "0%",
+                        genre: "Service",
+                        developer: "Electronic Arts",
+                        releaseDate: "2014",
+                        description: "EA Play یک سرویس اشتراکی است که به بازیکنان دسترسی به بازی‌های منتشر شده توسط Electronic Arts و محتوای انحصاری مرتبط با آن‌ها را ارائه می‌دهد.",
+                        background: "../src/png/eaplaybg.jpg",
+                        halfdesc1: "EA Play به بازیکنان این امکان را می‌دهد تا با پرداخت اشتراک ماهانه یا سالانه، به مجموعه‌ای گسترده از بازی‌های EA، از جمله سری‌های معروف مانند FIFA، Battlefield، The Sims و غیره دسترسی داشته باشند. علاوه بر این، اعضا می‌توانند پیش از عرضه بازی‌های جدید، به صورت آزمایشی آن‌ها را بازی کنند و از تخفیف‌های اختصاصی برای خرید بازی‌ها و محتوای درون بازی بهره‌مند شوند. این سرویس در پلتفرم‌های مختلفی مانند Xbox، PlayStation و PC از طریق Steam و Origin در دسترس است.",
+                        halfdesc2: "EA Play به دلیل ارائه بازی‌های متنوع و جدید، دسترسی پیش از موعد به عناوین بزرگ EA و تخفیف‌های ویژه، به یکی از محبوب‌ترین سرویس‌های اشتراکی در بین گیمرها تبدیل شده است.",
+                        primaryimage: "../src/png/Card/eaplay1.jpg",
+                        secondfirstimage: "../src/png/Card/eaplay2.jpg",
+                        secondtwoimage: "../src/png/Card/eaplay3.jpg",
+                        secondthreeimage: "../src/png/Card/eaplay4.jpg"
+                        },        
+                    {
+                        name: "Change Steam Reagon",
+                        img: "../src/png/Card/steamreagon.jpg",
+                        price: "363,000 تومان",
+                        discount: "0%",
+                        genre: "Service",
+                        developer: "Valve",
+                        releaseDate: "2003",
+                        description: "Steam یک پلتفرم توزیع دیجیتالی است که بازیکنان می‌توانند از طریق آن به خرید، نصب و  تغییر منطقه در Steam به کاربران اجازه می‌دهد تا به محتوای مخصوص کشور یا منطقه جغرافیایی خود دسترسی داشته باشند.",
+                        background: "../src/png/steamwalletukrainebg.jpg",
+                        halfdesc1: "تغییر منطقه (region) در Steam به کاربران این امکان را می‌دهد تا بر اساس محل جغرافیایی فعلی خود، به فروشگاه منطقه‌ای مربوطه دسترسی پیدا کنند. این شامل تغییر در واحد پول، قیمت‌گذاری و حتی بازی‌هایی است که در آن منطقه خاص قابل دسترسی هستند. Steam به طور خودکار منطقه کاربر را بر اساس آدرس IP تشخیص می‌دهد، اما کاربران می‌توانند منطقه خود را هنگام نقل مکان به کشور جدید به‌روزرسانی کنند. با این حال، تغییرات زیاد یا بی‌دلیل در منطقه ممکن است منجر به محدودیت یا مسدود شدن حساب کاربری شود.",
+                        halfdesc2: "برای تغییر منطقه در Steam، کاربران باید با استفاده از روش‌های پرداخت معتبر آن کشور و با مستندات مربوطه، به اثبات محل سکونت خود بپردازند. تغییر منطقه همچنین ممکن است تأثیری بر بازی‌های موجود در کتابخانه کاربران و تخفیف‌ها و قیمت‌گذاری‌ها داشته باشد.",
+                        primaryimage: "../src/png/Card/steamwalletukraine1.jpg",
+                        secondfirstimage: "../src/png/Card/steamwalletukraine2.jpg",
+                        secondtwoimage: "../src/png/Card/steamwalletukraine3.jpg",
+                        secondthreeimage: "../src/png/Card/steamwalletukraine4.jpg"
+                        }, 
+                    {
+                        name: "Playstaion Gift Card",
+                        img: "../src/png/Card/psgiftcard.jpeg",
+                        price: "1,663,000 تومان",
+                        discount: "0%",
+                        genre: "Service",
+                        developer: "Sony",
+                        releaseDate: "2006",
+                        description: "گیفت کارت‌های PlayStation به کاربران امکان می‌دهند تا بدون نیاز به کارت‌های اعتباری، اعتبار را به حساب PSN خود اضافه کنند و از آن برای خرید بازی‌ها، افزونه‌ها و اشتراک‌های مختلف استفاده کنند.",
+                        background: "../src/png/psgiftbg.jpg",
+                        halfdesc1: "گیفت کارت‌های PlayStation به کاربران امکان می‌دهند تا اعتبار PSN Wallet خود را افزایش دهند و از آن برای خرید بازی‌ها، DLC‌ها، محتوای اضافی، و اشتراک‌هایی مانند PlayStation Plus و PlayStation Now استفاده کنند. این کارت‌ها در مقادیر مختلفی ارائه می‌شوند و به صورت دیجیتالی یا فیزیکی در دسترس هستند. هر گیفت کارت یک کد منحصربه‌فرد دارد که کاربران می‌توانند آن را در حساب PSN خود وارد کنند تا به صورت مستقیم به کیف پول دیجیتالی خود اضافه شود.",
+                        halfdesc2: "این کارت‌ها به دلیل سادگی در استفاده و عدم نیاز به اطلاعات کارت اعتباری، یکی از روش‌های محبوب برای خرید محتوا و عضویت در سرویس‌های PlayStation محسوب می‌شوند. گیفت کارت‌های PlayStation به راحتی در فروشگاه‌های آنلاین و فیزیکی در دسترس هستند.",
+                        primaryimage: "../src/png/Card/psgift1.jpg",
+                        secondfirstimage: "../src/png/Card/psgift2.jpg",
+                        secondtwoimage: "../src/png/Card/psgift3.jpg",
+                        secondthreeimage: "../src/png/Card/psgift4.jpg"
+                        },  
+                    {
+                        name: "Steam Wallet Usa",
+                        img: "../src/png/Card/steamwalletusa.jpg",
+                        price: "663,000 تومان",
+                        discount: "0%",
+                        genre: "Service",
+                        developer: "Valve Corporation",
+                        releaseDate: "2003",
+                        description: "Steam Wallet Usa یک کارت هدیه دیجیتالی است که به کاربران امکان می‌دهد تا حساب استیم خود را با اعتبار شارژ کرده و بازی‌ها، محتواهای دیجیتال، و  فروشگاه استیم خریداری کنند.",
+                        background: "../src/png/steamwalletukrainebg.jpg",
+                        halfdesc1: "Steam Wallet Usa برای کاربران اوکراین طراحی شده است و به آن‌ها اجازه می‌دهد که با اعتبار محلی خود حساب استیم‌شان را شارژ کنند. این کارت‌های هدیه در مبالغ مختلف موجود هستند و می‌توان از آن‌ها برای خرید بازی‌ها، محتوای دانلودی (DLC)، نرم‌افزارها، و آیتم‌های درون بازی استفاده کرد. خرید و شارژ اعتبار از طریق Steam Wallet به کاربران این امکان را می‌دهد که بدون نیاز به کارت‌های بانکی بین‌المللی، از فروشگاه Steam استفاده کنند.",
+                        halfdesc2: "Steam Wallet Usa راهی ساده و ایمن برای دسترسی به محصولات استیم برای گیمرهای اوکراین است. این سرویس به‌خصوص برای کسانی که به دنبال هدیه دادن اعتبار استیم هستند یا تمایل دارند از پول محلی خود استفاده کنند، گزینه مناسبی به شمار می‌رود.",
+                        primaryimage: "../src/png/Card/steamwalletukraine1.jpg",
+                        secondfirstimage: "../src/png/Card/steamwalletukraine2.jpg",
+                        secondtwoimage: "../src/png/Card/steamwalletukraine3.jpg",
+                        secondthreeimage: "../src/png/Card/steamwalletukraine4.jpg"
+                        }, 
+                    {
+                        name: "Steam Wallet Brazil",
+                        img: "../src/png/Card/steamwalletbrazil.jpg",
+                        price: "963,000 تومان",
+                        discount: "0%",
+                        genre: "Service",
+                        developer: "Valve Corporation",
+                        releaseDate: "2003",
+                        description: "Steam Wallet Brazil یک کارت هدیه دیجیتالی است که به کاربران امکان می‌دهد تا حساب استیم خود را با اعتبار شارژ کرده و بازی‌ها، محتواهای دیجیتال، و  فروشگاه استیم خریداری کنند.",
+                        background: "../src/png/steamwalletukrainebg.jpg",
+                        halfdesc1: "Steam Wallet Brazil برای کاربران اوکراین طراحی شده است و به آن‌ها اجازه می‌دهد که با اعتبار محلی خود حساب استیم‌شان را شارژ کنند. این کارت‌های هدیه در مبالغ مختلف موجود هستند و می‌توان از آن‌ها برای خرید بازی‌ها، محتوای دانلودی (DLC)، نرم‌افزارها، و آیتم‌های درون بازی استفاده کرد. خرید و شارژ اعتبار از طریق Steam Wallet به کاربران این امکان را می‌دهد که بدون نیاز به کارت‌های بانکی بین‌المللی، از فروشگاه Steam استفاده کنند.",
+                        halfdesc2: "Steam Wallet Brazil راهی ساده و ایمن برای دسترسی به محصولات استیم برای گیمرهای اوکراین است. این سرویس به‌خصوص برای کسانی که به دنبال هدیه دادن اعتبار استیم هستند یا تمایل دارند از پول محلی خود استفاده کنند، گزینه مناسبی به شمار می‌رود.",
+                        primaryimage: "../src/png/Card/steamwalletukraine1.jpg",
+                        secondfirstimage: "../src/png/Card/steamwalletukraine2.jpg",
+                        secondtwoimage: "../src/png/Card/steamwalletukraine3.jpg",
+                        secondthreeimage: "../src/png/Card/steamwalletukraine4.jpg"
+                        },    
+                    {
+                        name: "Apex Legends Gift Card",
+                        img: "../src/png/Card/apexgift.jpg",
+                        price: "223,000 تومان",
+                        discount: "0%",
+                        genre: "Service",
+                        developer: "Respawn Ent",
+                        releaseDate: "2019",
+                        description: "گیفت کارت‌های Apex Legends به بازیکنان اجازه می‌دهند تا ارز درون بازی Apex Coins را خریداری کنند و از آن برای تهیه آیتم‌های تزئینی، شخصیت‌ها و Battle Pass استفاده کنند.",
+                        background: "../src/png/apexgiftbg.jpg",
+                        halfdesc1: "گیفت کارت‌های Apex Legends به کاربران این امکان را می‌دهند تا بدون نیاز به کارت‌های اعتباری، Apex Coins، ارز رسمی درون بازی را خریداری کنند. این ارز می‌تواند برای خرید اسکین‌های شخصیت‌ها و اسلحه‌ها، باز کردن قفل شخصیت‌های جدید، و خرید Battle Pass فصل‌ها استفاده شود. گیفت کارت‌ها در مقادیر مختلف موجود هستند و کدی دارند که در پلتفرم‌های مختلف مانند PlayStation, Xbox, Steam و Origin قابل استفاده است.",
+                        halfdesc2: "گیفت کارت‌های Apex Legends به دلیل سهولت در استفاده و امکان دستیابی به آیتم‌های درون بازی، یکی از روش‌های محبوب برای بازیکنان این بازی محبوب بتل رویال محسوب می‌شوند. بازیکنان می‌توانند با استفاده از این گیفت کارت‌ها، تجربه شخصی‌سازی بیشتری را در بازی داشته باشند.",
+                        primaryimage: "../src/png/Card/apexgift1.jpg",
+                        secondfirstimage: "../src/png/Card/apexgift2.jpg",
+                        secondtwoimage: "../src/png/Card/apexgift3.jpg",
+                        secondthreeimage: "../src/png/Card/apexgift4.jpg"
+                        },          
+        
+    ];
+
+    function getProductIdFromURL() {
+        const params = new URLSearchParams(window.location.search);
+        return params.get('id');
+    }
+
+    function loadProductInfo() {
+        const productId = getProductIdFromURL();
+        const product = products[productId];
+
+        if (product) {
+            document.getElementById('primaryimage').src = product.primaryimage;
+            document.getElementById('secondfirstimage').src = product.secondfirstimage;
+            document.getElementById('secondtwoimage').src = product.secondtwoimage;
+            document.getElementById('secondthreeimage').src = product.secondthreeimage;
+            document.getElementById('product-image').src = product.img;
+            document.getElementById('product-title').innerText = product.name;
+            document.getElementById('product-title2').innerText = product.name;
+            document.getElementById('product-price').innerText = product.price;
+            document.getElementById('product-genre').innerText = product.genre;
+            document.getElementById('product-halfdesc1').innerText = product.halfdesc1;
+            document.getElementById('product-halfdesc2').innerText = product.halfdesc2;
+            document.getElementById('product-developer').innerText = product.developer;
+            document.getElementById('product-releaseDate').innerText = product.releaseDate;
+            document.getElementById('product-discount').innerText = product.discount;
+            document.getElementById('product-description').innerText = product.description;
+            document.title = `خرید محصول ${product.name}`;
+            // تغییر تصویر پس‌زمینه
+            document.body.style.backgroundImage = `url(${product.background})`;
+        } else {
+            document.body.innerHTML = "<h1>محصولی یافت نشد</h1>";
+        }
+    }
+
+    // بارگذاری اطلاعات محصول پس از لود شدن صفحه
+    window.onload = loadProductInfo;
+
+
+
+    // گرفتن المان‌های مودال
+// گرفتن المان‌های مودال
+
+
+</script>
+
+</body>
+</html>
